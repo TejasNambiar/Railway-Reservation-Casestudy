@@ -1,26 +1,68 @@
-<div class="container">
+<div class="container-fluid">
     <h2>Train Booking</h2>
-    <div class="form-group">
-        <label class="label">Full name</label>
-        <input class="form-control" type="text" name="name">
-    </div><br>
-    <div class="form-group">
-        <label class="label">Email</label>
-        <input class="form-control" type="text" name="Email">
-    </div><br>
-    <div class="form-group">
-        <label class="label">Source</label>
-        <input class="form-control" type="text" name="Source">
-    </div><br>
-    <div class="form-group">
-        <label class="label">Destination</label>
-        <input class="form-control" type="text" name="Destination">
-    </div><br>
-    <div class="form-group">
-        <label class="label">Date</label>
-        <input class="form-control" type="text" name="Date">
-    </div><br>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Book ticket</button>
-    </div>
-</div>
+    <mat-stepper linear #stepper>
+        <mat-step>
+            <ng-template matStepLabel>Fill out your Details</ng-template>
+            <div class="form-group">
+                <label class="label">Full name</label>
+                <input class="form-control" [(ngModel)]="bookingArray.fullName" type="text" name="fullName">
+            </div><br>
+            <div class="form-group">
+                <label class="label">Email</label>
+                <input class="form-control" [(ngModel)]="bookingArray.email" type="text" name="email">
+            </div><br>
+            <div class="form-group">
+                <label class="label">Start Station</label>
+                <input class="form-control" [(ngModel)]="bookingArray.start" type="text" name="start">
+            </div><br>
+            <div class="form-group">
+                <label class="label">Destination</label>
+                <input class="form-control" [(ngModel)]="bookingArray.destination" type="text" name="destination">
+            </div><br>
+            <div class="form-group">
+                <label class="label">Train Name</label>
+                <input class="form-control" [(ngModel)]="bookingArray.trainName" type="text" name="trainName">
+            </div><br>
+            <div class="form-group">
+                <label class="label">Tier</label>
+                <input class="form-control" [(ngModel)]="bookingArray.tier" type="text" name="tier">
+            </div><br>
+            <div class="form-group">
+                <label class="label">Date</label>
+                <input class="form-control" [(ngModel)]="bookingArray.date" type="text" name="date">
+            </div><br>    
+            <div class="form-group">
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Authentication/Billing Details</ng-template>
+            <div class="form-group">
+                <label class="label">Adhaar</label>
+                <input class="form-control" [(ngModel)]="bookingArray.adhaar" type="text" name="adhaar">
+            </div><br> 
+            <div class="form-group">
+                <label class="label">Cardholder Name</label>
+                <input class="form-control" [(ngModel)]="bookingArray.cardHolder" type="text" name="cardholder">
+            </div><br>
+            <div class="form-group">
+                <label class="label">Card Number</label>
+                <input class="form-control" [(ngModel)]="bookingArray.cardNumber" type="text" name="cardNumber">
+            </div><br>
+            <div class="form-group">
+                <label class="label">CVV</label>
+                <input class="form-control"  [(ngModel)]="bookingArray.cvv" type="password" name="cvv">
+            </div><br>
+            <div class="form-group">
+                <button mat-raised-button type="submit" (click)="addBooking()" class="btn btn-primary">Book ticket</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Completed Booking</ng-template>
+            <h3>Done with booking</h3>
+        </mat-step>
+    </mat-stepper>
+  </div>
