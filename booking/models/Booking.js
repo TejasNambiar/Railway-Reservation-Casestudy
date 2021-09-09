@@ -26,9 +26,32 @@ const bookingSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please enter your destination']
     },
-    date:{
+    tier:{
         type: String,
+        required: [true, 'Please enter a tier']
+    },
+    date:{
+        type: Date,
         required: [true, 'Please enter a date']
+    },
+    adhaar:{
+        type: String,
+        length:10,
+        required: [true, 'Please enter adhaar number']
+    },
+    cardHolder:{
+        type: String,
+        required: [true, 'Please enter card holder name']
+    },
+    cardNumber:{
+        type: String,
+        length:16,
+        required: [true, 'Please enter card number']
+    },
+    cvv:{
+        type: String,
+        length:3,
+        required: [true, 'Please enter card cvv']
     }
 })
 

@@ -1,10 +1,12 @@
 const express =require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
+const cors = require('cors')
 const authRoutes = require('./routes/authRoutes')
 
 const PORT = 3050
 const app = express();
+app.use(cors())
 // database connection
 const dbURI = 'mongodb://localhost/Booking-Auth';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})

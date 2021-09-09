@@ -16,11 +16,11 @@ const handleError =(err) =>{
 
 // add new booking
 module.exports.booking_post = async (req,res) =>{
-  const { fullName, email, trainName, start, destination, date} = req.body
+  const { fullName, email, trainName, start, destination, tier, date, adhaar, cardHolder, cardNumber,cvv} = req.body
   try {
     // async - returns a promise
-    const user = await Booking.create({fullName, email, trainName, start, destination, date})
-    console.log(fullName, email, trainName, start, destination, date )
+    const user = await Booking.create({fullName, email, trainName, start, destination, tier, date, adhaar, cardHolder, cardNumber,cvv})
+    console.log(fullName, email, trainName, start, destination, tier, date, adhaar, cardHolder, cardNumber,cvv )
     res.status(201).json(user)
   } catch (err) {
     const errors = handleError(err)
