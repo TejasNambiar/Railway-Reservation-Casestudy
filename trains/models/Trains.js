@@ -20,15 +20,16 @@ const trainSchema = new mongoose.Schema({
     },
     arrivalTime:{
         type: String,
-        required: [true, 'Please enter your destination']
+        required: [true, 'Please enter arrival time to destination']
     },
     departureTime:{
         type: String,
-        required: [true, 'Please enter your destination']
+        required: [true, 'Please enter departure time from start station']
     },
     date:{
-        type: Date,
-        required: [true, 'Please enter a date']
+        type: String,
+        required: [true, 'Please enter a date'],
+        default: Date
     }
 })
 

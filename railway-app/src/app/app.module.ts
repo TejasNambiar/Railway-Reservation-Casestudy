@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule, routingComponent } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -10,14 +9,26 @@ import { BookingFormsComponent } from './booking-forms/booking-forms.component';
 import { TrainComponent } from './train/train.component';
 import { HttpClientModule} from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { LoginComponent } from './login/login.component';
+import { AdminComponent } from './admin/admin.component';
+import { HttpWebService } from './http-web.service';
+import { SignupComponent } from './signup/signup.component';
+import { SignupSuccessComponent } from './signup-success/signup-success.component';
+import { VerifiedComponent } from './verified/verified.component';
+import { VerifyComponent } from './verify/verify.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     routingComponent,
     BookingFormsComponent,
-    TrainComponent
+    TrainComponent,
+    LoginComponent,
+    AdminComponent,
+    SignupComponent,
+    SignupSuccessComponent,
+    VerifiedComponent,
+    VerifyComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +39,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [HttpWebService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

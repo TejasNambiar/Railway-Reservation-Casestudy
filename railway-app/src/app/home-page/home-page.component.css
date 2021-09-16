@@ -2,3 +2,7 @@ a{
     text-decoration: none;
     color: #000;
 }
+.nav-item{
+    margin-left: 0px;
+    background: pink;
+}

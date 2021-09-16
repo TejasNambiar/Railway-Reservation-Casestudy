@@ -1,1 +1,29 @@
 <h3>hello there</h3>
+<div class="container-fluid">
+    <form #authForm="ngForm">
+        <div class="form-group">
+            <label class="label">Enter your email</label>
+            <input type="text" class="form-control" placeholder="pat@example.com"  
+                [(ngModel)]="myForm.email" name="email" required>
+        </div><br>
+        <div class="form-group">
+            <label class="label">Enter Username</label>
+            <input type="text" class="form-control" placeholder="UserName" 
+                [(ngModel)]="myForm.username" name="username" required>
+        </div><br>
+        <div class="form-group">
+            <label class="label">Enter password</label>
+            <input type="password" class="form-control" placeholder="Enter password" 
+                [(ngModel)]="myForm.password" name="password" required>
+        </div><br>
+        <div class="form-group">
+            <label class="label">Confirm password</label>
+            <input type="password" class="form-control" placeholder="confirm password" 
+               [(ngModel)]="confirmPassword" name="confirmPassword" required>
+        </div><br>
+        <div class="form-group">
+            <button mat-raised-button type="submit" [disabled]="!authForm.form.valid" (click)="addUsers()" class="btn btn-primary">Sign Up</button>
+            <br><p>{{error}}</p>
+        </div>
+    </form>
+</div>

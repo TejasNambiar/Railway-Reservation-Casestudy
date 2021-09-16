@@ -1,22 +1,123 @@
+<nav class="navbar">
+    <span>
+        <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Hello {{user}}
+                <mat-icon>account_circle</mat-icon>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="right: 0; left: auto;">
+                <button mat-button><a class="dropdown-item" routerLink="/user/profile" routerLinkActive="active"><i class="material-icons">settings</i> View Profile</a></button>
+                <button mat-button><a class="dropdown-item" (click)='logout()'><i class="material-icons">power_settings_new</i>  Sign Out</a></button>
+            </div>
+        </div>
+    </span>
+</nav>
 <main>
-    <p>
-        -----------------------------------------------------<br>
-        MAIN CONTENT 1<BR>
-        -----------------------------------------------------<br>
-    </p>
-    <p>
-        -----------------------------------------------------<br>
-        MAIN CONTENT 2 <br>
-        -----------------------------------------------------<br>
-    </p>
+    <div class="container-fluid">
+        <h2 class="mb-3">Welcome to Railway Reservation</h2><hr>
+        <h3 class="mb-3">Notice for Passengers</h3>
+        <ul>
+            <li>Railway Services have resumed, and travel bookings can be made</li>
+            <li>Due to <strong>COVID</strong> restrictions, certain services may not be available</li>
+            <li>Kindly adhere to <strong>Government Guidlines</strong> during your travel.</li>
+        </ul>
+    </div>
 </main>
 <mat-tab-group>
     <mat-tab label="Train Schedule"> <br>
         <!--button><a routerLink="/trainData">Train Data</a></button>-->
         <app-train></app-train>
     </mat-tab>
-    <mat-tab label="PNR"><h3>Check PNR </h3></mat-tab>
+    <mat-tab label="PNR">
+        <h3>Check PNR </h3><hr>
+        <div class="container-fluid">
+            <form #myForm="ngForm">
+                <div class="form-group">
+                    <mat-label>Enter PNR Number</mat-label>
+                    <input class="form-control" #pnr="ngModel" [class.is-invalid]="pnr.invalid && pnr.touched" 
+                    [(ngModel)]="pnrArray.pnr" type="text" name="pnr" pattern="^([a-zA-Z0-9_-]){6}$" required>
+                </div>
+                <div *ngIf="pnr.errors && (pnr.touched || pnr.invalid)">
+                    <small class="text-danger" *ngIf="pnr.touched && pnr.errors.required">PNR number is required</small> 
+                    <small class="text-danger" *ngIf="pnr.errors.pattern">PNR must be 6 digits</small> 
+                </div>
+                <div class="form-group">
+                    <button mat-raised-button type="button" class="btn btn-primary" (click)="getPNR()" [disabled]="!myForm.form.valid">Get Booking</button>
+                </div>
+            </form>
+            <div class="form-group">
+                <table border="3.5px" *ngIf="loading">
+                    <tr>
+                        <th class = "col-md-3">Full Name</th>
+                        <th class = "col-md-3">gender</th>
+                        <th class = "col-md-3">Disablities</th>
+                        <th class = "col-md-3">Train Name</th>
+                        <th class = "col-md-3">Tier</th>
+                        <th class = "col-md-3">Special Services</th>
+                        <th class = "col-md-3">Start</th>
+                        <th class = "col-md-3">Destination</th>
+                        <th class = "col-md-3">Date</th>
+                        <th class = "col-md-3">PNR</th>
+                        <th class = "col-md-3">option</th>
+                    </tr>
+                    <tr>
+                        <td class = "col-md-3">{{pnrObject.fullName}}</td>
+                        <td class = "col-md-3">{{pnrObject.gender}}</td>
+                        <td class = "col-md-3">{{pnrObject.cvv}}</td>
+                        <td class = "col-md-3">{{pnrObject.trainName}}</td>
+                        <td class = "col-md-3">{{pnrObject.tier}}</td>
+                        <td class = "col-md-3">{{pnrObject.email}}</td>
+                        <td class = "col-md-3">{{pnrObject.start}}</td>
+                        <td class = "col-md-3">{{pnrObject.destination}}</td>
+                        <td class = "col-md-3">{{pnrObject.date}}</td>
+                        <td class = "col-md-3">{{pnrObject.pnr}}</td>
+                        <td class = "col-md-3">
+                            <button type="button" mat-raised-button class="btn btn-danger" (click)="deleteService(pnrObject)">delete</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </mat-tab>
     <mat-tab label="Booking">
-      <button mat-raised-button type="button"  class="btn btn-primary"><a routerLink="/booking">Click for Booking</a></button>
+        <div class="container-fluid">
+            <form #myForm="ngForm">
+                <div class="form-group">
+                    <mat-label class="label">Enter Start Location</mat-label>
+                    <select placeholder="start" [formControl]="to" class="form-control" required>
+                        <option [value]="start.stationName" *ngFor="let start of stationArray">{{start.stationName}}</option>
+                    </select>
+                    <mat-error *ngIf="to.invalid && to.touched">{{getErrorMessage()}}</mat-error>
+                </div><br>
+                <div class="form-group">
+                    <mat-label class="label">Enter Destination Location</mat-label>
+                        <select placeholder="destination" [formControl]="from" class="form-control" required>
+                            <option [value]="destination.stationName" *ngFor="let destination of stationArray">{{destination.stationName}}</option>
+                        </select>  
+                    <mat-error *ngIf="from.invalid && from.touched">{{getErrorMessage()}}</mat-error>
+                </div><br>
+                <button mat-raised-button type="button" (click)="searchTrain()" class="btn btn-primary">Get trains</button>
+            </form>
+            <p>{{errorMessage}}</p>
+            <div class="form-group">
+                <table border="3.5px">
+                    <tr>
+                        <th class = "col-md-3">Train Name</th>
+                        <th class = "col-md-3">Train Number</th>
+                        <th class = "col-md-3">From</th>
+                        <th class = "col-md-3">To</th>
+                        <th class = "col-md-3">Select</th>
+                    </tr>
+                    <tr *ngFor="let TRAIN of TrainArray">
+                        <td class = "col-md-3">{{TRAIN.trainName.values}}</td>
+                        <td class = "col-md-3">{{TRAIN.trainNumber}}</td>
+                        <td class = "col-md-3">{{TRAIN.startStation}}</td>
+                        <td class = "col-md-3">{{TRAIN.destination}}</td>
+                        <td class = "col-md-3"><button mat-raised-button class="btn btn-primary" (click)="prefill(TRAIN)" color="primary" (click)="bookClick()">Book</button></td>
+                    </tr>
+                </table> 
+            </div>
+            <button mat-raised-button type="button"  class="btn btn-primary" *ngIf="clicked"><a routerLink="/booking">Click for Booking</a></button>
+        </div>
     </mat-tab>
   </mat-tab-group>

@@ -10,7 +10,11 @@ router.post('/booking',authController.booking_post)
 router.get('/booking',authController.booking_get)
 
 // trains get by id
-router.get('/booking/:id',authController.booking_get_id)
+//router.get('/booking/:id',authController.booking_get_id)
+
+// trains get by pnr
+router.get('/booking/:pnr',authController.booking_get_pnr1)
+router.get('/booking/:adhaar/:pnr',authController.booking_get_pnr)
 
 // trains delete
 router.delete('/booking/:id',authController.booking_delete_id)

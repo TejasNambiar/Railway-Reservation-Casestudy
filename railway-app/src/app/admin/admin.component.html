@@ -1,0 +1,141 @@
+<p>admin works!</p>
+<mat-tab-group>
+    <mat-tab label="Train Schedule"> <br>
+        <div class="container">
+            <h2 class="page-header">Train TimeTable</h2>
+            <table border="2px" cellspacing="5px">
+                <tr>
+                    <th class = "col-md-3">Train Name</th>
+                    <th class = "col-md-3">Train Number</th>
+                    <th class = "col-md-3">Start Station</th>
+                    <th class = "col-md-3">Destination</th>
+                    <th class = "col-md-3">Arrival</th>
+                    <th class = "col-md-3">Departure</th>
+                    <th class = "col-md-3">Date</th>
+                </tr>
+                <tr *ngFor="let train of trainArray">
+                    <td class = "col-md-3">{{train.trainName}}</td>
+                    <td class = "col-md-3">{{train.trainNumber}}</td>
+                    <td class = "col-md-3">{{train.startStation}}</td>
+                    <td class = "col-md-3">{{train.destination}}</td>
+                    <td class = "col-md-3">{{train.arrivalTime}}</td>
+                    <td class = "col-md-3">{{train.departureTime}}</td>
+                    <td class = "col-md-3">{{train.date}}</td>
+                    <td class = "col-md-3">
+                        <button mat-icon-button (click)="deleteTrain(train)" value="Delete" class="btn btn-danger">
+                            Delete<mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+        <div class="container">
+            <h2 class="page-header">Admin - Train Form</h2>
+            <form #trainForm="ngForm">
+                <div class="form-group">
+                    <label class="label">Train Name</label>
+                    <input placeholder="Train Name" type="text" [(ngModel)]="newTrain.trainName" name="trainName" #name="ngModel"  
+                    [class.is-invalid]="name.invalid && name.touched" class="form-control" required>
+                    <small class="text-danger" [class.d-none]="name.valid || name.untouched">Name is required</small>
+                </div><br>
+
+                <div class="form-group">
+                    <label class="label">Train Number</label>
+                    <input placeholder="Train Number" type="text" [(ngModel)]="newTrain.trainNumber" name="trainNumber" #number="ngModel"  
+                    [class.is-invalid]="number.invalid && number.touched" class="form-control" required>
+                </div>
+                <div *ngIf="number.errors && (number.touched || number.invalid)">
+                    <small class="text-danger" *ngIf="number.touched && number.errors.required">Train Number is required</small> 
+                </div>
+                <br>
+
+                <div class="form-group">
+                    <label class="label">Start Station</label>
+                    <select palceholder="Start" [(ngModel)]="newTrain.startStation" name="startStation" #start="ngModel"  
+                    [class.is-invalid]="start.invalid && start.touched" class="form-control" required>
+                        <option [value]="start.stationName" *ngFor="let start of stationArray">{{start.stationName}}</option>
+                    </select>
+                </div>
+                <div *ngIf="start.errors && (start.touched || start.invalid)">
+                    <small class="text-danger" *ngIf="start.touched && start.errors.required">Start station is required</small> 
+                </div>
+                <br>
+
+                <div class="form-group">
+                    <label class="label">Destination</label>
+                    <select placeholder="Destination" type="text" [(ngModel)]="newTrain.destination" name="destination" #destination="ngModel"  
+                    [class.is-invalid]="destination.invalid && destination.touched" class="form-control" required>
+                        <option [value]="destination.stationName" *ngFor="let destination of stationArray">{{destination.stationName}}</option>
+                </select>
+                </div>
+                <div *ngIf="destination.errors && (destination.touched || destination.invalid)">
+                    <small class="text-danger" *ngIf="destination.touched && destination.errors.required">Destination is required</small> 
+                </div>
+                <br>
+
+                <div class="form-group">
+                    <label class="label">Arrival Time</label>
+                    <input placeholder="Arrival Time" type="text" [(ngModel)]="newTrain.arrivalTime" name="arrivalTime" #arrival="ngModel"  
+                    [class.is-invalid]="arrival.invalid && arrival.touched" class="form-control" required>
+                </div>
+                <div *ngIf="arrival.errors && (arrival.touched || arrival.invalid)">
+                    <small class="text-danger" *ngIf="arrival.touched && arrival.errors.required">Arrival Time is required</small> 
+                </div>
+                <br>
+
+                <div class="form-group">
+                    <label class="label">Departure Time</label>
+                    <input placeholder="Departure Time" type="text" [(ngModel)]="newTrain.departureTime" name="departureTime" #departure="ngModel"  
+                    [class.is-invalid]="departure.invalid && departure.touched" class="form-control" required>
+                </div>
+                <div *ngIf="departure.errors && (departure.touched || departure.invalid)">
+                    <small class="text-danger" *ngIf="departure.touched && departure.errors.required">Departure Time is required</small> 
+                </div>
+                <br>
+                <div class="form-group">
+                    <label class="label">Date</label>
+                    <input placeholder="mm-dd-yyyy" type="text" [(ngModel)]="newTrain.date" name="date" #date="ngModel"  
+                    [class.is-invalid]="date.invalid && date.touched" class="form-control" required>
+                </div>
+                <div *ngIf="date.errors && (date.touched || date.invalid)">
+                    <small class="text-danger" *ngIf="date.touched && date.errors.required">Date is required</small> 
+                </div>
+                <br>
+                <button type="submit" (click)="addTrain(trainForm)" class="btn btn-primary" [disabled]="!trainForm.form.valid">Submit</button>
+            </form>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Booking Details">
+        <div class="container">
+            <h2 class="page-header">Booking Details</h2>
+            <table border="2px" cellspacing="5px">
+                <tr>
+                    <th class = "col-md-3">Full Name</th>
+                    <th class = "col-md-3">Train Name</th>
+                    <th class = "col-md-3">Email</th>
+                    <th class = "col-md-3">Tier</th>
+                    <th class = "col-md-3">Start Station</th>
+                    <th class = "col-md-3">Destination</th>
+                    <th class = "col-md-3">Adhaar</th>
+                    <th class = "col-md-3">Date</th>
+                </tr>
+                <tr *ngFor="let book of bookingArray">
+                    <td class = "col-md-3">{{book.fullName}}</td>
+                    <td class = "col-md-3">{{book.trainName}}</td>
+                    <td class = "col-md-3">{{book.email}}</td>
+                    <td class = "col-md-3">{{book.tier}}</td>
+                    <td class = "col-md-3">{{book.start}}</td>
+                    <td class = "col-md-3">{{book.destination}}</td>
+                    <td class = "col-md-3">{{book.adhaar}}</td>
+                    <td class = "col-md-3">{{book.date}}</td>
+                    <td class = "col-md-3">
+                        <input type="button" (click)="deleteBooking(book)" value="Delete" class="btn btn-danger">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    </mat-tab>
+

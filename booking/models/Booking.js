@@ -11,7 +11,6 @@ const bookingSchema = new mongoose.Schema({
     email:{
         type:String,
         required: [true, 'Please enter an email'],
-        validate:[isEmail,"Please enter a valid email"],
         lowercase: true
     },
     trainName:{
@@ -31,27 +30,26 @@ const bookingSchema = new mongoose.Schema({
         required: [true, 'Please enter a tier']
     },
     date:{
-        type: Date,
-        required: [true, 'Please enter a date']
+        type: String,
+        required: [true, 'Please enter a date'],
+        default: Date
     },
     adhaar:{
         type: String,
         length:10,
         required: [true, 'Please enter adhaar number']
     },
-    cardHolder:{
+    gender:{
         type: String,
-        required: [true, 'Please enter card holder name']
-    },
-    cardNumber:{
-        type: String,
-        length:16,
-        required: [true, 'Please enter card number']
+        required: [true, 'Please enter gender name']
     },
     cvv:{
         type: String,
-        length:3,
         required: [true, 'Please enter card cvv']
+    },
+    pnr:{
+        type: String,
+        required: [true, 'Did not generate pnr as expected']
     }
 })
 

@@ -1,0 +1,29 @@
+[
+    {
+        "trainName": "train4",
+        "trainNumber": 933,
+        "startStation": "dadar",
+        "destination": "manali",
+        "arrivalTime": "11:30",
+        "departureTime": "11:50",
+        "date": "2018-07-31T18:30:00Z"
+    },
+    {
+        "trainName": "train4",
+        "trainNumber": 933,
+        "startStation": "manali",
+        "destination": "delhi",
+        "arrivalTime": "12:30",
+        "departureTime": "12:50",
+        "date": "2018-09-30T18:30:00Z"
+    },
+    {
+        "trainName": "train5",
+        "trainNumber": 934,
+        "startStation": "manali",
+        "destination": "delhi",
+        "arrivalTime": "12:50",
+        "departureTime": "01:10",
+        "date": "2018-09-30T18:30:00Z"
+    }
+]
