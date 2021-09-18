@@ -1,5 +1,5 @@
 <div class="flex-parent">
-    <div class="flex-container"><h2>Train Booking</h2></div>
+    <div class="h2-container"><h2>Train Booking</h2></div>
     <mat-stepper linear #stepper>
     <form #myForm="ngForm">
         <mat-step>
@@ -123,8 +123,8 @@
             </div>
         </form>
         </mat-step>
-        <mat-step>
-            <ng-template matStepLabel>Confirm Booking</ng-template>
+        <mat-step class="tab1">
+            <ng-template matStepLabel><span class="custom-tab">Confirm Booking</span></ng-template>
             <div class="form-group">
                 <h3>Confirm Booking Details</h3><hr>
                 <ul>

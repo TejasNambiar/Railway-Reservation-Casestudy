@@ -5,6 +5,7 @@ import {MatFormFieldModule} from '@angular/material/form-field'
 import {MatStepperModule} from '@angular/material/stepper'
 import {MatButtonModule} from '@angular/material/button'
 import {MatIconModule} from '@angular/material/icon'
+import {MatGridListModule} from '@angular/material/grid-list'
 
 const materials = [
   MatTabsModule,
@@ -12,7 +13,8 @@ const materials = [
   MatFormFieldModule,
   MatStepperModule,
   MatButtonModule,
-  MatIconModule
+  MatIconModule,
+  MatGridListModule
 ]
 
 @NgModule({

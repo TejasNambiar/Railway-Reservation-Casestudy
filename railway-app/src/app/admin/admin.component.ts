@@ -30,15 +30,17 @@ export class AdminComponent implements OnInit {
     // on itnialization, displays the contacts on the webpage
     this.trainService.getTrain()
       .subscribe(train => this.trainArray = train)
-
+    
+    // loading booking data
     this.bookService.getBooking()
       .subscribe(booking => this.bookingArray = booking)
 
-    
+    // select stations from db
     this.stationService.getStation()
       .subscribe(station => this.stationArray = station)
   }
 
+  // adding train data
   addTrain(form:NgForm){
     this.trainService.addTrain(this.newTrain)
       .subscribe(train => this.trainArray = train)
@@ -53,6 +55,7 @@ export class AdminComponent implements OnInit {
     console.log("id: "+object._id)
     this.trainService.deleteTrain(object._id)
       .subscribe(train => this.trainArray = train)
+    
     // after add, displays data aded on webpage
     this.trainService.getTrain()
     .subscribe(train => this.trainArray = train)

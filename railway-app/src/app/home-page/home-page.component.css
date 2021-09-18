@@ -4,5 +4,53 @@ a{
 }
 .nav-item{
     margin-left: 0px;
-    background: pink;
+    background: #c7c8cafb;
+}
+.navbar{    
+    background-color: #d3d9df;
+}
+.dropdown-menu{
+    background: #c7c8cafb;
+}
+h2 {
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 300;
+    font-size: 2.0rem;
+    text-align: center;
+    color: #1565C0;
+}
+
+h3 {
+    color: #1565C0;
+}
+
+p {
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 200;
+    font-size: 1.3rem;
+    text-align: center;
+    color: #82B1FF;
+}
+
+button:hover {
+    width: 18%;
+    background-color: #F50057;
+    border-color: #F50057;
+    transition: linear 1s;
+}
+
+button {
+    transition: linear 1s;
+}
+
+span{
+    align-items: flex-start;
+}
+.btn-danger:hover{
+    background-color: red;
+    border-color: red;
+    transition: linear 1s; 
+}
+main{
+    background-color: #d3d9df;
 }

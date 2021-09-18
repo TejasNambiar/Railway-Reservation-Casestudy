@@ -3,7 +3,7 @@ const Trains = require('../models/Trains')
 // error handling
 const handleError =(err) =>{
   console.log(err.message, err.code)
-  let errors = {fullName:'',email:'',trainName:'',start:'',destination:'',date:''}
+  let errors = {fullName:'',email:'',trainName:'',start:'',destination:'',date:'', arrivalTime:'', departureTime:''}
 
   // validation errors
   if(err.message.includes('train validation failed')) 
@@ -14,7 +14,7 @@ const handleError =(err) =>{
   return errors
 }
 
-// add new booking
+// add new train
 module.exports.train_post = async (req,res) =>{
   const { trainName, trainNumber, startStation, destination, arrivalTime, departureTime, date} = req.body
   try {
@@ -35,7 +35,6 @@ module.exports.train_post = async (req,res) =>{
   }
 // retrieve by id
 module.exports.train_get_id = (req,res) =>{
-    let output = {}
     Trains.findOne({_id:req.params.id}, (err,result)=>{
       if(err)
           res.json(err)
@@ -58,6 +57,7 @@ module.exports.train_get_id = (req,res) =>{
     })
   }
 
+  // searching to and from stations
   module.exports.train_get_search = (req, res) =>{
     Trains.find({ startStation: req.params.to, destination: req.params.from }, (err, result)=>{
           if(err)

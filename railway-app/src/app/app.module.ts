@@ -16,6 +16,7 @@ import { SignupComponent } from './signup/signup.component';
 import { SignupSuccessComponent } from './signup-success/signup-success.component';
 import { VerifiedComponent } from './verified/verified.component';
 import { VerifyComponent } from './verify/verify.component';
+import { PaymentComponent } from './payment/payment.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { VerifyComponent } from './verify/verify.component';
     SignupComponent,
     SignupSuccessComponent,
     VerifiedComponent,
-    VerifyComponent
+    VerifyComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

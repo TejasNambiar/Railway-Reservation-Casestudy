@@ -1,6 +1,7 @@
 .navbar{
     justify-content: space-between;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: #000;
 }
 .navbar button{
     font-size: 20px;
@@ -11,10 +12,17 @@ span{
 .MainHeader{
     font-size: 40px;
 }
+header a{ 
+    font-family: 'Segoe UI', sans-serif;
+    color: #1565C0;
+}
 a{
     text-decoration: none;
     color: #000;
 }
 .mat-button{
     margin-left: 8px;
+}
+label {
+    font-weight: 500;
 }

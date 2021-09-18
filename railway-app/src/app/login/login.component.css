@@ -7,19 +7,21 @@ p {
 }
 
 button:hover {
-    width: 50%;
+    width: 25%;
     background-color: #F50057;
     border-color: #F50057;
 }
 
 button {
-    width: 50%;
+    width: 25%;
     background-color: #1A237E;
     border-color: #1A237E;
     margin-bottom: 10%;
 }
 
 a {
+    
+    text-decoration: none;
     color: #90CAF9;
 }
 

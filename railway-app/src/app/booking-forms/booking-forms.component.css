@@ -1,8 +1,50 @@
 .label{
-    font-size: 15px;
     font-weight: 500;
 }
 a{
     text-decoration: none;
     color: #000;
+}
+h2 {
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 300;
+    font-size: 2.0rem;
+    color: #1565C0;
+}
+button:hover {
+    width: 15%;
+    background-color: #F50057;
+    border-color: #F50057;
+}
+
+button {
+    width: 15%;
+    background-color: #1A237E;
+    border-color: #1A237E;
+    margin-bottom: 10%;
+    color: white;
+    justify-content: space-between;
+}
+
+.form-group {
+    font-weight: 300;
+    text-align: left;
+}
+label {
+    font-size: 15px;
+    font-weight: 500 !important;
+    color: #128efa !important;
+}
+.flex-parent{
+    background-color: #d3d9df;
+}
+
+ng-template:hover{
+    background-color: #969797;
+}
+.h2-container{
+    margin-left: 19px;
+}
+.tab1{
+    background-color: #969797;
 }
