@@ -1,5 +1,10 @@
+<app-admin1></app-admin1><br><br><br>
 <mat-tab-group>
-    <mat-tab label="Train Schedule"> <br>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>book</mat-icon>
+            Train Schedule
+          </ng-template> <br>
         <div class="container">
             <h2 class="page-header"><i class="material-icons">equalizer</i>Train TimeTable</h2>
             <table border="2px" cellspacing="5px">
@@ -95,20 +100,71 @@
                 <br>
                 <div class="form-group">
                     <label class="label">Date</label>
-                    <input placeholder="mm-dd-yyyy" type="text" [(ngModel)]="newTrain.date" name="date" #date="ngModel"  
+                    <input type="date" [(ngModel)]="newTrain.date" name="date" #date="ngModel"  
                     [class.is-invalid]="date.invalid && date.touched" class="form-control" required>
                 </div>
                 <div *ngIf="date.errors && (date.touched || date.invalid)">
                     <small class="text-danger" *ngIf="date.touched && date.errors.required">Date is required</small> 
                 </div>
                 <br>
-                <button type="submit" (click)="addTrain(trainForm)" class="btn btn-primary" [disabled]="!trainForm.form.valid">Submit</button>
+                <button type="submit" id="submit" (click)="addTrain(trainForm)" class="btn btn-primary" [disabled]="!trainForm.form.valid">Submit</button>
             </form>
         </div>
     </mat-tab>
-
-    <mat-tab label="Booking Details">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>book</mat-icon>
+            Station Data
+          </ng-template> <br>
         <div class="container">
+            <h2 class="page-header"><i class="material-icons">equalizer</i>Station Information Table</h2>
+            <table border="2px" cellspacing="5px">
+                <tr>
+                    <th class = "col-md-3">Station Name</th>
+                    <th class = "col-md-3">Station Code</th>
+                    <th class = "col-md-3">Operation</th>
+                </tr>
+                <tr *ngFor="let station of stationArray">
+                    <td class = "col-md-3">{{station.stationName}}</td>
+                    <td class = "col-md-3">{{station.stationCode}}</td>
+                    <td class = "col-md-3">
+                        <button mat-icon-button (click)="deleteStation(station)" value="Delete" class="btn btn-danger">
+                            Delete<mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+        <div class="container">
+            <h2 class="page-header">Admin - Station Form</h2>
+            <form #stationForm="ngForm">
+                <div class="form-group">
+                    <label class="label">Station Name</label>
+                    <input placeholder="Station Name" type="text" [(ngModel)]="newStation.stationName" name="stationName" #stationName="ngModel"  
+                    [class.is-invalid]="stationName.invalid && stationName.touched" class="form-control" required>
+                    <small class="text-danger" [class.d-none]="stationName.valid || stationName.untouched">Station Name is required</small>
+                </div><br>
+
+                <div class="form-group">
+                    <label class="label">Station Code</label>
+                    <input placeholder="Station Code" type="text" [(ngModel)]="newStation.stationCode" name="stationCode" #stationCode="ngModel"  
+                    [class.is-invalid]="number.invalid && number.touched" class="form-control" required>
+                </div>
+                <div *ngIf="stationCode.errors && (stationCode.touched || number.invalid)">
+                    <small class="text-danger" *ngIf="stationCode.touched && stationCode.errors.required">Station Code is required</small> 
+                </div>
+                <br>
+                <button type="submit" id="submit" (click)="addStation(stationForm)" class="btn btn-primary" [disabled]="!stationForm.form.valid">Submit</button>
+            </form>
+        </div>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>book</mat-icon>
+            Booking Details
+          </ng-template>
+        <div class="container"><br>
             <h2 class="page-header"><i class="material-icons">equalizer</i>Booking Details</h2>
             <table border="2px" cellspacing="5px">
                 <tr>

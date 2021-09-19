@@ -19,8 +19,13 @@
                     <label for="confirm">Confirm Password</label>
                     <input type="password" id="cpassword" name="confirm" [(ngModel)]="confirm" class="form-control csp" placeholder="Confirm Password">
                 </div>
-
+                <div class="form-group">
+                    <label for="usertype"> Please select if you are User or Admin</label>
+                    <input type="text" id="usertype" name="usertype" [(ngModel)]="usertype" class="form-control csp" style="width:80%" list="userTypeList" placeholder="Select User Type">
+                    <datalist id="userTypeList"></datalist>
+                </div>
                 <br>
+                <hr>
                 <br>
 
                 <h2>Financial Details</h2>
@@ -82,13 +87,6 @@
                     <input type="text" id="zip" name="zip" [(ngModel)]="zip" class="form-control csp" placeholder="PIN/ZIP Code">
                 </div>
             </div>
-        </div>
-        <br>
-        <div class="form-check was-validated">
-            <label class="form-check-label custom-control custom-checkbox">
-      		<span class="custom-control-indicator"></span>
-    		<span class="custom-control-description">I have read the all the <a class="terms" href="#">terms and conditions</a> carefully, as stated by your company and will abide by them.</span>     		
-    		</label>
         </div>
         <br>
         <p class="errorDetect">{{action}}</p>

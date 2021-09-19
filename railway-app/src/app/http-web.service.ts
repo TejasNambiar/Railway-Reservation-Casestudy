@@ -33,7 +33,7 @@ export class HttpWebService {
   }
 
 
-  createNewUser(username: string, password: string, aadhaar: string, PAN: string, occupation: string, firstname: string, lastname: string, dob: string, phone: string, address: string, city: string, state: string, country: string, zip: string) {
+  createNewUser(usertype:string, username: string, password: string, aadhaar: string, PAN: string, occupation: string, firstname: string, lastname: string, dob: string, phone: string, address: string, city: string, state: string, country: string, zip: string) {
     const url = 'http://localhost:2000/signUpUser';
     const reqBody = {
       'email': username,
@@ -52,7 +52,7 @@ export class HttpWebService {
       'state': state,
       'country': country,
       'pin': zip,
-      'userType': 'user',
+      'userType': usertype,
       'lastLoggIn': 'NA',
       'sessionStatus': 'Not Verified',
       'currentSession': 'NA'

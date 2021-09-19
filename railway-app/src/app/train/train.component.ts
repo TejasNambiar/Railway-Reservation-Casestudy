@@ -9,7 +9,7 @@ import { TrainService } from '../train.service';
   providers: [TrainService]
 })
 export class TrainComponent implements OnInit {
-
+ 
   trainArray: any=[]
   newTrain = {
     trainName: '',

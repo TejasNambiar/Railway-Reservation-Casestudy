@@ -1,0 +1,15 @@
+<nav class="navbar fixed-top justify-content-between">
+    <h2 class="mb-3"><a routerLink="/homePage">Welcome to Railway Reservation</a></h2>
+    <span>
+        <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Hello {{user}}
+                <mat-icon>account_circle</mat-icon>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="right: 0; left: auto;">
+                <a class="dropdown-item" routerLink="/user/profile" routerLinkActive="active"><i class="material-icons">settings</i> View Profile</a>
+                <a class="dropdown-item" (click)='logout()'><i class="material-icons">power_settings_new</i>  Sign Out</a>
+            </div>
+        </div>
+    </span>
+</nav>

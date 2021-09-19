@@ -3,7 +3,7 @@ button:hover {
     border-color: red;
     transition: linear;
     border-radius: 10%;
-    width: 80%;
+    width: 25%;
 }
 h2 {
     font-family: 'Segoe UI', sans-serif;
@@ -11,4 +11,19 @@ h2 {
     font-size: 2.0rem;
     text-align: center;
     color: #1565C0;
+}
+.mat-tab-label{
+    background:aqua;
+    color: blue;
+    width: 60px;
+    height: 50px;
+    font-size: 40px;
+  }
+
+#submit:hover{
+    background-color: #F50057;
+    border-color: #F50057;
+    transition: linear;
+    border-radius: 10%;
+    width: 25%;
 }

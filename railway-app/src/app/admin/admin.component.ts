@@ -11,7 +11,10 @@ import { TrainService } from '../train.service';
 })
 export class AdminComponent implements OnInit {
 
+  bookingArray:any = []
+  stationArray: any;
   trainArray: any=[]
+
   newTrain = {
     trainName: '',
     trainNumber: '',
@@ -21,9 +24,10 @@ export class AdminComponent implements OnInit {
     departureTime: '',
     date: ''
   } 
-
-  bookingArray:any = []
-  stationArray: any;
+  newStation = {
+    stationName: '',
+    stationCode: ''
+  }
  
   constructor(private bookService:BookingService, private trainService:TrainService, private stationService:StationService){} 
   ngOnInit(): void {
@@ -46,8 +50,7 @@ export class AdminComponent implements OnInit {
       .subscribe(train => this.trainArray = train)
     
     // after add, displays data aded on webpage
-    this.trainService.getTrain()
-      .subscribe(train=> this.trainArray =train)
+    this.ngOnInit()
     form.reset()
   }
 
@@ -61,7 +64,28 @@ export class AdminComponent implements OnInit {
     .subscribe(train => this.trainArray = train)
   }
 
+  // Station Service Admin Interface
+  
+  // Add Station
+  addStation(form:NgForm){
+    this.stationService.addStation(this.newStation)
+      .subscribe(station => this.stationArray = station)
+    
+    // after add, displays data aded on webpage
+    this.stationService.getStation()
+    .subscribe(station => this.stationArray =station)
+    form.reset()
+  }
 
+  // Delete Station
+  deleteStation(object:any){
+    console.log("id: "+object._id)
+    this.stationService.deleteStation(object._id)
+      .subscribe(booking => this.bookingArray = booking)
+    
+    this.stationService.getStation()
+      .subscribe(booking => this.stationArray = booking)
+  }
 
   // Booking Services Admin Interface
   deleteBooking(object:any){

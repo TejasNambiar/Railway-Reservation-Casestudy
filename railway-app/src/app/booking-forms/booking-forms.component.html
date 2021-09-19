@@ -1,10 +1,13 @@
+<app-signedin></app-signedin><br>
+<br><br>
 <div class="flex-parent">
     <div class="h2-container"><h2 class="main-header"><i class="material-icons">dynamic_form</i>Train Booking</h2></div>
+    <br>
     <mat-stepper linear #stepper>
     <form #myForm="ngForm">
-        <mat-step>
+        <mat-step id="step">
         <form #subForm = "ngForm">
-
+            <br>
             <ng-template matStepLabel>Fill out your Details</ng-template>
             <div class="flex-container">
                 <div class="flex-item">
@@ -59,6 +62,8 @@
                     </div>
                 </div>
                 <br>
+                <hr>
+                <br>
                 <div class="flex-item">
                     <h2><i class="material-icons">info</i>Station Details</h2>
                     <div class="form-group">
@@ -83,6 +88,8 @@
                         <small class="text-danger" *ngIf="destination.touched && destination.errors.required">Destination Station is required</small> 
                     </div>
                 </div>
+                <br>
+                <hr>
                 <br>
                 <div class="flex-item">
                     <h2><i class="material-icons">info</i>Train Details</h2>
@@ -109,7 +116,6 @@
                     <div *ngIf="tier.errors && (tier.touched || tier.invalid)">
                         <small class="text-danger" *ngIf="tier.touched && tier.errors.required">Tier is required</small> 
                     </div>
-                    <br>
 
                     <div class="form-group">
                         <label class="label">Date</label>
@@ -169,8 +175,9 @@
                     </ul>
                 </div>
                 <div class="form-group">
+                    <div *ngIf="resetTouched"><p><i class="material-icons">report</i>A technical error seems to have occured. please click reset again</p></div>
                     <button mat-raised-button matStepperNext type="button" [disabled]="error" class="btn btn-primary">confirm ticket</button>
-                    <button mat-button matStepperPrevious (click)="reset()">Reset</button>
+                    <button mat-button (click)="reset1(bookingArray.pnr)">Reset</button>
                     <button mat-button matStepperPrevious (click)="back()" >Back</button>
                 </div>
             </div>
@@ -195,14 +202,13 @@
                     (loadpaymentdata)="onLoadPaymentData($event)" (error)="onError($event)" [paymentAuthorizedCallback]="onPaymentDataAuthorized">
                 </google-pay-button>
                 <button mat-raised-button matStepperNext type="submit" class="btn btn-primary" [disabled]="!payTrue">Book ticket</button>
-                <button mat-raised-button (click)="reset1(bookingArray.pnr)">Reset</button>
                 <button mat-raised-button matStepperPrevious>Back</button>
             </div>
         </mat-step>
 
         <mat-step>
             <ng-template matStepLabel>Completed Booking</ng-template>
-            <div *ngIf="!error">
+            <div *ngIf="set">
                 <h2><i class="material-icons">confirmation_number</i>Confirmed Details</h2><hr>
                 <h3>Done with booking</h3>
                 <table border="3.5px" >
@@ -234,18 +240,14 @@
                         <td class = "col-md-3">{{trainPrefill.arrivalTime}}</td>
                         <td class = "col-md-3">{{bookingArray.date}}</td>
                     </tr>
-                </table>
-                <p>PNR for reference: {{pnrStatus}} </p><br>
+                </table><br>
+                <h3>PNR for reference:</h3>
+                <p>{{pnrStatus}} </p><br>
                 <button mat-raised-button type="button" class="btn btn-primary"><a routerLink="/homePage">Go to Homepage</a></button>
             </div>
             <div *ngIf="error">
-                <h3><i class="material-icons">report</i>Opps! Error Occured.</h3>
-                {{errorMsg}}
-                <ul>
-                    <li>Confirmed Booking ticket data not visible as error may have occured</li>
-                    <li>Please re-enter/re-submit details into form</li>
-                </ul>
-                <button mat-raised-button class="btn btn-primary" (click)="reset()" (click)="stepper.reset()">Reset</button>
+                <h3>Booking Not Completed/Confirmed Yet</h3><hr>
+                <p>Kindly go back and complete the registration process to view this step</p>
             </div>
         </mat-step>
     </form>

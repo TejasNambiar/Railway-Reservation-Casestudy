@@ -57,3 +57,25 @@ google-pay-button{
 mat-raised-button{
     bottom:10px;
 }
+p, ul{
+    font-size: 15px;
+    font-weight: 500 !important;
+    color: #275ea3 !important;
+}
+#step{
+    background: #e9edef;
+}
+hr{
+    width: 100%;
+    height: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #b7d0e2;
+    border: 0 none;
+}
+#trains{
+    background-color: #6e6e6e;
+}
+.main-header{
+    padding-top: 10px;
+}

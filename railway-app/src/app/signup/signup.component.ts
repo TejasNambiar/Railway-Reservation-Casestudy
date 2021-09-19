@@ -26,19 +26,32 @@ export class SignupComponent implements OnInit {
 	state!: string;
 	country!: string;
 	zip!: string;
+  usertype!:string
 
 
 	action: string;
 	details!: string;
 	validate = true;
   errors: any;
+  clicked!:boolean
+  userTypeList:any[] = []
 
 
 	constructor(private httpWebService: HttpWebService, private router: Router) {
 		this.action = '';
+    this.userTypeList = ['admin','user']
 	}
   ngOnInit(): void {
+    this.clicked=false
     //throw new Error('Method not implemented.');
+    window.scrollTo(0, 0);
+    let dataList = document.getElementById('userTypeList');
+
+    this.userTypeList.forEach(function(item) {
+      const option = document.createElement('option');
+      option.value = item;
+      dataList!.appendChild(option);
+    })
   }
 
 
@@ -71,7 +84,7 @@ export class SignupComponent implements OnInit {
       	document.getElementById('state')!.classList.remove('invalid-input');
       	document.getElementById('country')!.classList.remove('invalid-input');
       	document.getElementById('zip')!.classList.remove('invalid-input');
-
+      	document.getElementById('usertype')!.classList.remove('invalid-input');
 
 
       if (this.username == null || this.username === '') {
@@ -116,6 +129,12 @@ export class SignupComponent implements OnInit {
   	  }
   	  if (this.firstname == null || this.firstname === '') {
   		  document.getElementById('firstname')!.classList.add('invalid-input');
+
+  		this.action = 'Please Enter your first name and try submitting again.';
+  		this.validate = false;
+  	  }
+      if (this.usertype == null || this.usertype === '') {
+  		  document.getElementById('usertype')!.classList.add('invalid-input');
 
   		this.action = 'Please Enter your first name and try submitting again.';
   		this.validate = false;
@@ -185,10 +204,12 @@ export class SignupComponent implements OnInit {
   	if (this.validate) {
       // tslint:disable-next-line:max-line-length
       console.log("validate: "+this.validate)
-      this.httpWebService.createNewUser(this.username, this.password, this.aadhaar, this.PAN, this.occupation, this.firstname, this.lastname, this.dob, this.phone, this.address, this.city, this.state, this.country, this.zip);
+      this.httpWebService.createNewUser(this.usertype,this.username, this.password, this.aadhaar, this.PAN, this.occupation, this.firstname, this.lastname, this.dob, this.phone, this.address, this.city, this.state, this.country, this.zip);
       console.log("routing to success page")
       this.router.navigate(['signupsuccess']);
-	}
-}
-
+	  }
+  }
+  click(){
+    this.clicked =true
+  }
 }

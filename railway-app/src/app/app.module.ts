@@ -16,8 +16,10 @@ import { SignupComponent } from './signup/signup.component';
 import { SignupSuccessComponent } from './signup-success/signup-success.component';
 import { VerifiedComponent } from './verified/verified.component';
 import { VerifyComponent } from './verify/verify.component';
-import { PaymentGooglepayComponent } from './payment-googlepay/payment-googlepay.component';
 import { GooglePayButtonModule } from '@google-pay/button-angular';
+import { SignedinComponent } from './signedin/signedin.component';
+import { UserComponent } from './user/user.component';
+import { Admin1Component } from './admin1/admin1.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,9 @@ import { GooglePayButtonModule } from '@google-pay/button-angular';
     SignupSuccessComponent,
     VerifiedComponent,
     VerifyComponent,
-    PaymentGooglepayComponent
+    SignedinComponent,
+    UserComponent,
+    Admin1Component
   ],
   imports: [
     BrowserModule,

@@ -1,20 +1,7 @@
-<nav class="navbar">
-    <span>
-        <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Hello {{user}}
-                <mat-icon>account_circle</mat-icon>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="right: 0; left: auto;">
-                <a class="dropdown-item" routerLink="/user/profile" routerLinkActive="active"><i class="material-icons">settings</i> View Profile</a>
-                <a class="dropdown-item" (click)='logout()'><i class="material-icons">power_settings_new</i>  Sign Out</a>
-            </div>
-        </div>
-    </span>
-</nav>
+<div><app-signedin></app-signedin></div><br>
+<br><br>
 <main>
     <div class="container-fluid">
-        <h2 class="mb-3">Welcome to Railway Reservation</h2><hr>
         <h3 class="mb-3">Notice for Passengers</h3>
         <ul>
             <li>Railway Services have resumed, and travel bookings can be made</li>
@@ -25,10 +12,10 @@
 </main>
 <mat-tab-group bagroundColor="primary">
     <mat-tab label="Train Schedule"> <br>
-        <app-train></app-train>
+        <div  id="trains"><app-train></app-train></div>
     </mat-tab>
     <mat-tab label="PNR">
-        <div class="container-fluid">
+        <div class="container-fluid" id="pnr">
             <h3 class="h3">Check PNR </h3><hr>
             <form #myForm="ngForm">
                 <div class="form-group">
@@ -44,8 +31,9 @@
                     <button mat-raised-button type="button" class="btn btn-primary" (click)="getPNR()" [disabled]="!myForm.form.valid">Get Booking</button>
                 </div>
             </form>
-            <div class="form-group">
-                <table border="3.5px" *ngIf="loading">
+            <div class="form-group" *ngIf="loading">
+                <h3 class="main-header" style="text-align: center;"><i class="material-icons">equalizer</i> PNR Found</h3>
+                <table border="3.5px">
                     <tr>
                         <th class = "col-md-3">Full Name</th>
                         <th class = "col-md-3">gender</th>
@@ -99,7 +87,7 @@
             </form>
             <p>{{errorMessage}}</p>
             <div class="form-group">
-                <h2 class="main-header" style="text-align: center;"><i class="material-icons" style="font-weight: 700; font-size: 2.8rem; line-height: 1em">equalizer</i> Trains Found</h2>
+                <h3 class="main-header" style="text-align: center;"><i class="material-icons">equalizer</i> Trains Found</h3>
                 <table border="3.5px" id="TrainArray">
                     <tr>
                         <th class = "col-md-3">Train Name</th>

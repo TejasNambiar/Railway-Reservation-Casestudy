@@ -4,32 +4,34 @@ a{
 }
 .nav-item{
     margin-left: 0px;
-    background: #c7c8cafb;
+    background: #e9edef;
 }
 .navbar{    
-    background-color: #d3d9df;
+    background-color: #000010;
 }
 .dropdown-menu{
-    background: #c7c8cafb;
+    background: #e9edef;
 }
 h2 {
     font-family: 'Segoe UI', sans-serif;
     font-weight: 300;
     font-size: 2.0rem;
     text-align: center;
-    color: #1565C0;
+    color: #9ecfe7;
 }
 
 h3 {
-    color: #1565C0;
+    color: #275ea3;
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 300;
+    font-size: 2.0rem;
 }
 
-p {
+ul li {
     font-family: 'Segoe UI', sans-serif;
     font-weight: 200;
     font-size: 1.3rem;
-    text-align: center;
-    color: #82B1FF;
+    color: #4b5354;
 }
 
 button:hover {
@@ -51,5 +53,34 @@ span{
     transition: linear 1s; 
 }
 main{
+    background-color: #e9edef;
+}
+material-icons{
+    font-weight: 700; 
+    font-size: 2.8rem; 
+    line-height: 1em;
+}
+.PNR{
     background-color: #d3d9df;
+}
+#pnr{
+    background-color: #d3d9df;
+}
+input{
+    width: 15%;
+}
+select{
+    width: 25%;
+}
+th{
+    background: #4b5354;
+}
+td{
+    background: #9ecfe7;
+}
+mat-tab:active{
+    background: #4b5354;
+}
+.mb-3{
+    padding-top: 10px;
 }

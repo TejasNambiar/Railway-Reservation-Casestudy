@@ -1,7 +1,7 @@
 p {
     font-family: 'Segoe UI', sans-serif;
-    font-weight: 100;
-    font-size: 1.0rem;
+    font-size: 15px;
+    font-weight: 500 !important;
     text-align: center;
     color: #82B1FF;
 }
@@ -84,4 +84,20 @@ a {
 label {
     font-weight: 500 !important;
     color: #128efa !important;
+}
+.display-3{
+    color: #275ea3;
+}
+#tile1{
+    background: #4b5354;
+}
+#tile2{
+    background-image: url("../../assets/RailPIC1.jpg");
+    background-size: 100% 100%;
+    color: white;
+}
+#tile2 h1{
+    height: 70px;
+    padding-bottom: 100px;    
+    font-family: 'Segoe UI', sans-serif;
 }
