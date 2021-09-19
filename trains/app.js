@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
 const authRoutes = require('./routes/authRoutes')
 const cors = require('cors')
+const Trains = require('./models/Trains')
 
 const PORT = 3060
 const app = express();
@@ -20,7 +21,3 @@ app.use(express.json());
 
 // calls the authentication routes
 app.use('/api',authRoutes)
-
-// app.post('/api/trains',(req,res)=>{
-//   console.log("hello")
-// })

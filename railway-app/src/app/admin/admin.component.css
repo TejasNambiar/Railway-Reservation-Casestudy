@@ -1,0 +1,14 @@
+button:hover {
+    background-color: red;
+    border-color: red;
+    transition: linear;
+    border-radius: 10%;
+    width: 80%;
+}
+h2 {
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 300;
+    font-size: 2.0rem;
+    text-align: center;
+    color: #1565C0;
+}

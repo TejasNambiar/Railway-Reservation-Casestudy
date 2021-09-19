@@ -33,7 +33,6 @@ p {
 }
 
 button:hover {
-    width: 18%;
     background-color: #F50057;
     border-color: #F50057;
     transition: linear 1s;

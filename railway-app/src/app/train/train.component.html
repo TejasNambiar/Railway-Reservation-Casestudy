@@ -1,5 +1,5 @@
 <div class="container">
-    <h2 class="page-header">Train TimeTable</h2>
+    <h2 class="main-header"><i class="material-icons">equalizer</i> Trains TimeTable</h2>
     <table border="2px" cellspacing="5px">
         <tr>
             <th class = "col-md-3">Train Name</th>
@@ -8,7 +8,7 @@
             <th class = "col-md-3">Destination</th>
             <th class = "col-md-3">Arrival</th>
             <th class = "col-md-3">Departure</th>
-            <th class = "col-md-3">Date</th>
+            <th class = "col-md-3">Travel Time (hr:min:sec)</th>
         </tr>
         <tr *ngFor="let train of trainArray">
             <td class = "col-md-3">{{train.trainName}}</td>

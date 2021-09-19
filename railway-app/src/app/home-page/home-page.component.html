@@ -23,14 +23,13 @@
         </ul>
     </div>
 </main>
-<mat-tab-group>
+<mat-tab-group bagroundColor="primary">
     <mat-tab label="Train Schedule"> <br>
-        <!--button><a routerLink="/trainData">Train Data</a></button>-->
         <app-train></app-train>
     </mat-tab>
     <mat-tab label="PNR">
-        <h3>Check PNR </h3><hr>
         <div class="container-fluid">
+            <h3 class="h3">Check PNR </h3><hr>
             <form #myForm="ngForm">
                 <div class="form-group">
                     <mat-label>Enter PNR Number</mat-label>
@@ -100,7 +99,7 @@
             </form>
             <p>{{errorMessage}}</p>
             <div class="form-group">
-                <h2 class="main-header" style="text-align: center; padding-top:5%;"><i class="material-icons" style="font-weight: 700; font-size: 2.8rem; line-height: 1em">equalizer</i> Trains Found</h2>
+                <h2 class="main-header" style="text-align: center;"><i class="material-icons" style="font-weight: 700; font-size: 2.8rem; line-height: 1em">equalizer</i> Trains Found</h2>
                 <table border="3.5px" id="TrainArray">
                     <tr>
                         <th class = "col-md-3">Train Name</th>

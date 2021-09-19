@@ -7,6 +7,7 @@ import { BookingFormsComponent } from './booking-forms/booking-forms.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginSignupComponent } from './login-signup/login-signup.component';
 import { LoginComponent } from './login/login.component';
+import { PaymentGooglepayComponent } from './payment-googlepay/payment-googlepay.component';
 import { SignupSuccessComponent } from './signup-success/signup-success.component';
 import { SignupComponent } from './signup/signup.component';
 import { TrainComponent } from './train/train.component';
@@ -26,7 +27,8 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent },
   { path: 'signupsuccess', component: SignupSuccessComponent },
   { path: 'otp/userVerifyChallenge', component: VerifyComponent },
-  { path: 'verifiedOTP', component: VerifiedComponent }
+  { path: 'verifiedOTP', component: VerifiedComponent },
+  {path:'googlePay',component:PaymentGooglepayComponent}
 ];
 
 @NgModule({

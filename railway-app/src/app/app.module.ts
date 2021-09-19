@@ -16,7 +16,8 @@ import { SignupComponent } from './signup/signup.component';
 import { SignupSuccessComponent } from './signup-success/signup-success.component';
 import { VerifiedComponent } from './verified/verified.component';
 import { VerifyComponent } from './verify/verify.component';
-import { PaymentComponent } from './payment/payment.component';
+import { PaymentGooglepayComponent } from './payment-googlepay/payment-googlepay.component';
+import { GooglePayButtonModule } from '@google-pay/button-angular';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,7 @@ import { PaymentComponent } from './payment/payment.component';
     SignupSuccessComponent,
     VerifiedComponent,
     VerifyComponent,
-    PaymentComponent
+    PaymentGooglepayComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +40,8 @@ import { PaymentComponent } from './payment/payment.component';
     MaterialModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GooglePayButtonModule
   ],
   providers: [HttpWebService],
   bootstrap: [AppComponent]

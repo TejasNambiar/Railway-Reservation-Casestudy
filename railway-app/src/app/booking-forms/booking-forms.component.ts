@@ -11,6 +11,9 @@ import { TrainService } from '../train.service';
 export class BookingFormsComponent implements OnInit {
   errorMsg: any;
   error!: boolean;
+  payTrue!: boolean;
+  resetFlag!:boolean
+  resetTouched !:boolean
 
   constructor(private bookService:BookingService, private trainService:TrainService) { }
 
@@ -31,6 +34,8 @@ export class BookingFormsComponent implements OnInit {
   trainPrefill!:any
   visible:boolean = false
   pnrStatus!:String
+  dummyData!:any
+  set!:boolean 
   
   creditArray ={
     accountNumber:'',
@@ -42,7 +47,10 @@ export class BookingFormsComponent implements OnInit {
     this.id=this.trainService.getTrainPrefill()
     console.log('Booking train id: ',this.id)
     this.Prefill(this.id)
-    this.error=false
+    this.error=true
+    this.payTrue=false    
+    this.resetTouched = false
+    this.resetFlag=false
     
   }
 
@@ -95,6 +103,30 @@ export class BookingFormsComponent implements OnInit {
     cvv:'',
     pnr:''
     }
+    this.creditArray ={
+      accountNumber:'',
+      accountHolder:'',
+      secret:''
+    }
+  }
+  reset1(pnr:any){
+    this.resetTouched = true
+    console.log("Parameter PNR: "+pnr)
+    console.log("ADHAAR: "+this.bookingArray.pnr)
+    console.log("ADHAAR: "+this.bookingArray.pnr,this.bookingArray.adhaar)
+    this.bookService.getBookingPnr(pnr,this.bookingArray.adhaar).subscribe(data=>this.dummyData=data)
+    console.log("Object In Question: "+JSON.stringify(this.dummyData))
+    if(this.dummyData){
+      this.resetTouched=false
+      console.log("ID selected: "+this.dummyData._id)
+      console.log("Name selected: "+this.dummyData.fullName)
+      this.bookService.deleteBooking(this.dummyData._id).subscribe(data=>this.dummyData=data)
+      console.log("ID Deleted: "+this.dummyData._id)
+      console.log("Name deleted: "+this.dummyData.fullName)
+      this.reset()
+    }
+    else
+      this.resetFlag=false
   }
 
   next(){
@@ -114,5 +146,63 @@ export class BookingFormsComponent implements OnInit {
     }
     return result;
   }
+  paymentAccess(){
+    this.payTrue=true
+  }
 
+  // google pay
+  paymentRequest: google.payments.api.PaymentDataRequest = {
+    apiVersion: 2,
+    apiVersionMinor: 0,
+    allowedPaymentMethods: [
+      {
+        type: 'CARD',
+        parameters: {
+          allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+          allowedCardNetworks: ['AMEX', 'VISA', 'MASTERCARD']
+        },
+        tokenizationSpecification: {
+          type: 'PAYMENT_GATEWAY',
+          parameters: {
+            gateway: 'example',
+            gatewayMerchantId: 'exampleGatewayMerchantId'
+          }
+        }
+      }
+    ],
+    merchantInfo: {
+      merchantId: '12345678901234567890',
+      merchantName: 'Demo Merchant'
+    },
+    transactionInfo: {
+      totalPriceStatus: 'FINAL',
+      totalPriceLabel: 'Total',
+      totalPrice: '4500',
+      currencyCode: 'EUR',
+      countryCode: 'BE'
+    },
+    callbackIntents: ['PAYMENT_AUTHORIZATION']
+  };
+
+  onLoadPaymentData = (
+    event: Event
+  ): void => {
+    const eventDetail = event as CustomEvent<google.payments.api.PaymentData>;
+    console.log('load payment data', eventDetail.detail);
+  }
+
+  onPaymentDataAuthorized: google.payments.api.PaymentAuthorizedHandler = (
+    paymentData
+    ) => {
+      console.log('payment authorized', JSON.stringify(paymentData));
+      this.set = true
+      this.payTrue=true
+      return {
+        transactionState: 'SUCCESS'
+      };
+    }
+
+  onError = (event: ErrorEvent): void => {
+    console.error('error', event.error);
+  }
 }

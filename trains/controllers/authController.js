@@ -30,7 +30,7 @@ module.exports.train_post = async (req,res) =>{
 // rerieve all data
   module.exports.train_get = (req,res) =>{
     Trains.find((err, contacts) =>{
-      res.json(contacts)
+      res.status(201).json(contacts)
   })
   }
 // retrieve by id

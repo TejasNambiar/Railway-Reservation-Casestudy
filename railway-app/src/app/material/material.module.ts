@@ -6,6 +6,8 @@ import {MatStepperModule} from '@angular/material/stepper'
 import {MatButtonModule} from '@angular/material/button'
 import {MatIconModule} from '@angular/material/icon'
 import {MatGridListModule} from '@angular/material/grid-list'
+import {MatPaginatorModule} from '@angular/material/paginator'
+import {MatTableModule} from '@angular/material/table'
 
 const materials = [
   MatTabsModule,
@@ -14,7 +16,8 @@ const materials = [
   MatStepperModule,
   MatButtonModule,
   MatIconModule,
-  MatGridListModule
+  MatGridListModule,
+  MatPaginatorModule
 ]
 
 @NgModule({

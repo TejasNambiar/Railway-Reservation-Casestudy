@@ -28,8 +28,7 @@ const trainSchema = new mongoose.Schema({
     },
     date:{
         type: String,
-        required: [true, 'Please enter a date'],
-        default: Date
+        required: [true, 'Please enter a TravelTime'],
     }
 })
 
