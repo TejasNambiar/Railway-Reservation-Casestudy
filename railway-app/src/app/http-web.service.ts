@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
-import {HttpClientModule} from '@angular/common/http'
-import {HttpClient} from '@angular/common/http'
 import { map } from 'rxjs/operators';
-import { ThrowStmt } from '@angular/compiler';
 // import 'rxjs/Rx';
 @Injectable()
 export class HttpWebService {
@@ -100,13 +97,5 @@ export class HttpWebService {
     const req = this.http.post(url, reqBody).map((res: Response) => res.json());
     return req;
   }
-
-  // setLoggedStatus(value:any){
-  //   this.logged= value
-  // }
-  // getLoggedStatus(){
-  //   console.log(this.logged)
-  //   return this.logged
-  // }
 
 }

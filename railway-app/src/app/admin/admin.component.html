@@ -1,4 +1,11 @@
-<app-admin1></app-admin1><br><br><br>
+<app-admin1></app-admin1><br>
+<div class="container-fluid">
+    <h3 class="mb-3">IRCTC Administrator Dashboad</h3>
+<ul>
+    <li>In order to update/ make any changes, please select the respective Tab</li>
+    <li>Train TimeTable is subject change, please keep updated any changes in schedule</li>\
+</ul>
+</div>
 <mat-tab-group>
     <mat-tab>
         <ng-template mat-tab-label>
@@ -18,7 +25,8 @@
                     <th class = "col-md-3">Date</th>
                     <th class = "col-md-3">Operation</th>
                 </tr>
-                <tr *ngFor="let train of trainArray">
+                <tr *ngFor="let train of trainArray | paginate: {
+                    id:'list_pagination1', itemsPerPage:5, currentPage: page, totalItems: totalRecords1}">
                     <td class = "col-md-3">{{train.trainName}}</td>
                     <td class = "col-md-3">{{train.trainNumber}}</td>
                     <td class = "col-md-3">{{train.startStation}}</td>
@@ -33,6 +41,9 @@
                     </td>
                 </tr>
             </table>
+            <div>
+                <pagination-controls class="Pagination" id="list_pagination1" [maxSize]="five" [directionLinks]="True" (pageChange)="page=$event"></pagination-controls>
+            </div>
         </div>
         <hr>
         <div class="container">
@@ -117,14 +128,15 @@
             Station Data
           </ng-template> <br>
         <div class="container">
-            <h2 class="page-header"><i class="material-icons">equalizer</i>Station Information Table</h2>
-            <table border="2px" cellspacing="5px">
+            <h2 class="page-header2"><i class="material-icons">equalizer</i>Station Information Table</h2>
+            <table id="station" border="2px" cellspacing="5px">
                 <tr>
                     <th class = "col-md-3">Station Name</th>
                     <th class = "col-md-3">Station Code</th>
                     <th class = "col-md-3">Operation</th>
                 </tr>
-                <tr *ngFor="let station of stationArray">
+                <tr *ngFor="let station of stationArray | paginate: {
+                    id:'list_pagination2', itemsPerPage:4, currentPage: page, totalItems: totalRecords2}">
                     <td class = "col-md-3">{{station.stationName}}</td>
                     <td class = "col-md-3">{{station.stationCode}}</td>
                     <td class = "col-md-3">
@@ -134,6 +146,9 @@
                     </td>
                 </tr>
             </table>
+            <div>
+                <pagination-controls class="Pagination2" id="list_pagination2" [maxSize]="five" [directionLinks]="True" (pageChange)="page=$event"></pagination-controls>
+            </div>
         </div>
         <hr>
         <div class="container">
@@ -176,9 +191,11 @@
                     <th class = "col-md-3">Destination</th>
                     <th class = "col-md-3">Adhaar</th>
                     <th class = "col-md-3">Date</th>
+                    <th class = "col-md-3">PNR</th>
                     <th class = "col-md-3">Operation</th>
                 </tr>
-                <tr *ngFor="let book of bookingArray">
+                <tr *ngFor="let book of bookingArray | paginate: {
+                    id:'list_pagination3', itemsPerPage:5, currentPage: page, totalItems: totalRecords3}">
                     <td class = "col-md-3">{{book.fullName}}</td>
                     <td class = "col-md-3">{{book.trainName}}</td>
                     <td class = "col-md-3">{{book.email}}</td>
@@ -187,6 +204,7 @@
                     <td class = "col-md-3">{{book.destination}}</td>
                     <td class = "col-md-3">{{book.adhaar}}</td>
                     <td class = "col-md-3">{{book.date}}</td>
+                    <td class = "col-md-3">{{book.pnr}}</td>
                     <td class = "col-md-3">
                         <button mat-icon-button type="button" (click)="deleteBooking(book)" value="Delete" class="btn btn-danger">
                             Delete<mat-icon>delete</mat-icon>
@@ -194,6 +212,9 @@
                     </td>
                 </tr>
             </table>
+            <div>
+                <pagination-controls class="Pagination" id="list_pagination3" [maxSize]="five" [directionLinks]="True" (pageChange)="page=$event"></pagination-controls>
+            </div>
         </div>
         <hr>
     </mat-tab>

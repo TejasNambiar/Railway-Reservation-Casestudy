@@ -10,6 +10,8 @@ import { TrainService } from '../train.service';
 })
 export class TrainComponent implements OnInit {
  
+  totalRecords !:string
+  page:number = 1
   trainArray: any=[]
   newTrain = {
     trainName: '',
@@ -25,14 +27,18 @@ export class TrainComponent implements OnInit {
   } 
   loading = false;
   errorMessage = "";
-
+  True = true
+  five= 5
  
   constructor(private trainService:TrainService){}
 
   ngOnInit(): void {
     // on itnialization, displays the contacts on the webpage
     this.trainService.getTrain()
-      .subscribe(train => this.trainArray = train)
+      .subscribe(train => 
+        this.trainArray = train
+        )
+    this.totalRecords = this.trainArray.length
   }
   addTrain(){
     this.trainService.addTrain(this.newTrain)

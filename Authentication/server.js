@@ -54,50 +54,54 @@ app.get('/api/trains', function(req, res, next) {
 });
 
 
-app.get('/api/stations', function(req, res, next) {
-    Stations.getStations(function(err, station) {
-        if (err)
-            console.log('Error occured: --------> ' + err);
-        res.json(station)
-    });
-});
+// app.get('/api/stations', function(req, res, next) {
+//     Stations.getStations(function(err, station) {
+//         if (err)
+//             console.log('Error occured: --------> ' + err);
+//         res.json(station)
+//     });
+// });
 
 
 // login credentials
 app.post('/login', function(req, res) {
     var cred = req.body;
 
+    // identifier -> username from req.body
     Users.createToken(cred.identifier, function(err, user) {
         if (err)
             console.log('Error occured: --------> ' + err);
         else {
-
             if (user == null) {
                 res.json({
                     status: "403"
                 });
             } else {
+                
+                // callback successfull with user for token creation
                 if (cred.identifier == user.email && cred.password == user.password) {
-
+                    
+                    // checks for first time log
                     if (user.sessionStatus === "Not Verified") {
                         res.json({
                             userid: cred.identifier,
                             status: 401
                         });
                     } else {
-
+                        // Starts the session on browser by giving access
                         var data = {
                             "email": user.email,
                             "session_id": uuidv4(),
                             "creation_time": Date.now(),
                         };
 
+                        // checks for admin or user
                         if (user.userType == "admin")
                             routes = "/admin";
                         else
                             routes = "/user";
 
-
+                        // assign jwt token with status 200
                         jwt.sign({ data }, '4E37F6EB24C177F499C491BB9748EEE2118D8F2F984E37F6AAC40F356ECCEW8I', { expiresIn: '24h' }, (err, token) => {
                             var messagePayload = {
                                 "token": token,
@@ -213,7 +217,10 @@ function uuidv4() {
     });
 }
 
+// update jwt token
 function updateTokenLogin(email, token, res, carrier) {
+
+    // once user authenticated, updates sessionStatus to Signed In
     Users.updateToken(email, "Signed In", token, function(err, user) {
         if (err)
             console.log('Error occured: --------> ' + err);
@@ -299,6 +306,7 @@ app.post('/verifyUserChallenge', function(req, res) {
         if (err) {
             console.log('Error occured: --------> ' + err);
         } else {
+            // checks for verified users if siignedup but not verified
             if (user.sessionStatus === 'Not Verified') {
 
                 const otpDetails = {
@@ -309,10 +317,11 @@ app.post('/verifyUserChallenge', function(req, res) {
                     "status": "Not Verified"
                 };
 
+                // call otp builder requestOTPGeneration
                 RqOTP.requestOTPGeneration(otpDetails);
                 sendOTP(otpDetails.session_id, user.countryCode, user.phone, otpDetails.otpn, res);
 
-                // call otp builder requestOTPGeneration
+                
             } else {
                 res.sendStatus(403);
             }
@@ -333,6 +342,7 @@ app.post('/verifyOTP', function(req, res) {
     });
 });
 
+// generates random otp for User confirmation
 function genOTP() {
     return 'xxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random() * 16 | 0,

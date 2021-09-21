@@ -14,6 +14,7 @@ export class SignedinComponent implements OnInit {
   constructor( private _httpWebService:HttpWebService, private router:Router) { }
 
   ngOnInit(): void {
+    // checks for sessionStorage status
     if (window.sessionStorage.getItem('auth-token') != null) {
       this._httpWebService.verifyUserLogin(window.sessionStorage.getItem('auth-token'))
       .subscribe((resp: any) => {
@@ -21,6 +22,7 @@ export class SignedinComponent implements OnInit {
         if (userData.status === '403') {
           this.router.navigate(['#']);
         } else {
+          // changes routes to keep the users to users segment 
           if (userData.route === '/user') {
             this.router.navigate(['user']);
             this._httpWebService.signInDetails()
@@ -32,6 +34,7 @@ export class SignedinComponent implements OnInit {
               });
 
           } else {
+            // changes routes to keep the users to users segment 
             this.router.navigate(['admin']);
           }
         }

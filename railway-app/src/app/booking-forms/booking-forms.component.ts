@@ -111,23 +111,26 @@ export class BookingFormsComponent implements OnInit {
     }
   }
   reset1(pnr:any){
-    this.resetTouched = true
-    console.log("Parameter PNR: "+pnr)
-    console.log("ADHAAR: "+this.bookingArray.pnr)
-    console.log("ADHAAR: "+this.bookingArray.pnr,this.bookingArray.adhaar)
-    this.bookService.getBookingPnr(pnr,this.bookingArray.adhaar).subscribe(data=>this.dummyData=data)
-    console.log("Object In Question: "+JSON.stringify(this.dummyData))
-    if(this.dummyData){
-      this.resetTouched=false
-      console.log("ID selected: "+this.dummyData._id)
-      console.log("Name selected: "+this.dummyData.fullName)
-      this.bookService.deleteBooking(this.dummyData._id).subscribe(data=>this.dummyData=data)
-      console.log("ID Deleted: "+this.dummyData._id)
-      console.log("Name deleted: "+this.dummyData.fullName)
-      this.reset()
+    
+    if(confirm("Are you sure to delete booking with PNR "+pnr)) {  
+      this.resetTouched = true
+      console.log("Parameter PNR: "+pnr)
+      console.log("ADHAAR: "+this.bookingArray.pnr)
+      console.log("ADHAAR: "+this.bookingArray.pnr,this.bookingArray.adhaar)
+      this.bookService.getBookingPnr(pnr,this.bookingArray.adhaar).subscribe(data=>this.dummyData=data)
+      console.log("Object In Question: "+JSON.stringify(this.dummyData))
+      if(this.dummyData){
+        this.resetTouched=false
+        console.log("ID selected: "+this.dummyData._id)
+        console.log("Name selected: "+this.dummyData.fullName)
+        this.bookService.deleteBooking(this.dummyData._id).subscribe(data=>this.dummyData=data)
+        console.log("ID Deleted: "+this.dummyData._id)
+        console.log("Name deleted: "+this.dummyData.fullName)
+        this.reset()
+      }
+      else
+        this.resetFlag=false
     }
-    else
-      this.resetFlag=false
   }
 
   next(){

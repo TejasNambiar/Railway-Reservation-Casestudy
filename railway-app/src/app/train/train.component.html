@@ -10,7 +10,8 @@
             <th class = "col-md-2">Departure</th>
             <th class = "col-md-2">Travel Time (hr:min:sec)</th>
         </tr>
-        <tr *ngFor="let train of trainArray">
+        <tr *ngFor="let train of trainArray | paginate: {
+            id:'list_pagination', itemsPerPage:5, currentPage: page, totalItems: totalRecords}">
             <td class = "col-md-3">{{train.trainName}}</td>
             <td class = "col-md-2">{{train.trainNumber}}</td>
             <td class = "col-md-3">{{train.startStation}}</td>
@@ -20,5 +21,8 @@
             <td class = "col-md-2">{{train.date}}</td>
         </tr>
     </table>
+    <div>
+        <pagination-controls class="Pagination" id="list_pagination" [maxSize]="five" [directionLinks]="True" (pageChange)="page=$event"></pagination-controls>
+    </div>
 </div>
 <hr>

@@ -186,6 +186,12 @@
                 {{errorMsg}}
                 <ul>
                     <li>Confirmed Booking ticket data not visible as error may have occured</li>
+                    <li>Could have oucrred for the following reasons:
+                        <ul>
+                            <li>Adhaar matches an existing user</li>
+                            <li>Or Booking already exists against full name provided</li>
+                        </ul> 
+                    </li>
                     <li>Please re-enter/re-submit details into form</li>
                 </ul>
                 <button mat-raised-button class="btn btn-primary" (click)="reset()" (click)="stepper.reset()">Reset</button>

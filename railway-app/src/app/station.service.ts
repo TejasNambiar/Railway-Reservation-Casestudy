@@ -9,6 +9,7 @@ import { map, catchError } from 'rxjs/operators';
 export class StationService {
 
   urlStation = "http://localhost:3070/api/stations"
+  awsURL = "https://1oydxk81i3.execute-api.us-east-1.amazonaws.com/test/resource"
   constructor(private http:HttpClient) { }
 
   getStation():Observable<any>{

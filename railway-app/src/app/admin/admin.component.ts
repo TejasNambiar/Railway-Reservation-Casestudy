@@ -14,6 +14,12 @@ export class AdminComponent implements OnInit {
   bookingArray:any = []
   stationArray: any;
   trainArray: any=[]
+  True = true
+  five= 5
+  totalRecords1 !:string
+  totalRecords2 !:string
+  totalRecords3 !:string
+  page:number = 1
 
   newTrain = {
     trainName: '',
@@ -33,15 +39,22 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     // on itnialization, displays the contacts on the webpage
     this.trainService.getTrain()
-      .subscribe(train => this.trainArray = train)
+      .subscribe(train => 
+        this.trainArray = train
+        )
+    this.totalRecords1 = this.trainArray.length
     
     // loading booking data
     this.bookService.getBooking()
       .subscribe(booking => this.bookingArray = booking)
+    
+    this.totalRecords2 = this.bookingArray.length
 
     // select stations from db
     this.stationService.getStation()
       .subscribe(station => this.stationArray = station)
+    
+    this.totalRecords3 = this.stationArray.length
   }
 
   // adding train data
@@ -55,9 +68,11 @@ export class AdminComponent implements OnInit {
   }
 
   deleteTrain(object:any){
-    console.log("id: "+object._id)
-    this.trainService.deleteTrain(object._id)
-      .subscribe(train => this.trainArray = train)
+    if(confirm("Are you sure to delete "+object.trainName)) {
+      console.log("id: "+object._id)
+      this.trainService.deleteTrain(object._id)
+        .subscribe(train => this.trainArray = train)
+    }
     
     // after add, displays data aded on webpage
     this.trainService.getTrain()
@@ -79,9 +94,11 @@ export class AdminComponent implements OnInit {
 
   // Delete Station
   deleteStation(object:any){
-    console.log("id: "+object._id)
-    this.stationService.deleteStation(object._id)
-      .subscribe(booking => this.bookingArray = booking)
+    if(confirm("Are you sure to delete booking with PNR "+object.stationName)) {
+      console.log("id: "+object._id)
+      this.stationService.deleteStation(object._id)
+        .subscribe(booking => this.bookingArray = booking)
+    }
     
     this.stationService.getStation()
       .subscribe(booking => this.stationArray = booking)
@@ -89,10 +106,11 @@ export class AdminComponent implements OnInit {
 
   // Booking Services Admin Interface
   deleteBooking(object:any){
-    console.log("id: "+object._id)
-    this.bookService.deleteBooking(object._id)
-      .subscribe(booking => this.bookingArray = booking)
-    
+    if(confirm("Are you sure to delete booking with PNR "+object.pnr)) {
+      console.log("id: "+object._id)
+      this.bookService.deleteBooking(object._id)
+        .subscribe(booking => this.bookingArray = booking)
+    }
     this.bookService.getBooking()
       .subscribe(booking => this.bookingArray = booking)
   }
