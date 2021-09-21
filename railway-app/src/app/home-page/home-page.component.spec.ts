@@ -1,12 +1,16 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TrainService } from '../train.service';
 import { HttpClientTestingModule, HttpTestingController } from  '@angular/common/http/testing';
 
 import { HomePageComponent } from './home-page.component';
+import { HttpWebService } from '../http-web.service';
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
-xdescribe('HomePageComponent', () => {
+describe('HomePageComponent', () => {
   let component: HomePageComponent;
   let fixture: ComponentFixture<HomePageComponent>;
   let testBedTrainService: TrainService
@@ -14,8 +18,15 @@ xdescribe('HomePageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ HomePageComponent ],
-      imports:[FormsModule,HttpClientTestingModule],
-      providers:[TrainService]
+      imports:[
+        FormsModule,
+        HttpClientTestingModule,
+        HttpModule,
+        RouterModule,
+        RouterTestingModule,
+        ReactiveFormsModule
+      ],
+      providers:[TrainService,HttpWebService]
     })
     .compileComponents();
   });
@@ -33,11 +44,13 @@ xdescribe('HomePageComponent', () => {
   });
 
   it('should check the  train service instance', ()=> {
-    const service: TrainService = TestBed.get(TrainService)
-    expect( service).toBeTruthy()
+    let service: TrainService;
+    service = TestBed.inject(TrainService);
+    expect(service).toBeTruthy();
   })
-  xit('should inject the train service and check its instance ', inject([TrainService],(injectedService:TrainService)=>{
-    expect(injectedService).toBeTruthy()
-    expect(injectedService instanceof TrainService).toBeTruthy()
-  }))
+  it('should inject the HttpWeb service and check its instance ', ()=>{
+    let service: HttpWebService;
+    service = TestBed.inject(HttpWebService);
+    expect(service).toBeTruthy();
+  })
 });

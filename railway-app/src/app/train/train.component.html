@@ -3,21 +3,21 @@
     <table border="2px" cellspacing="5px">
         <tr>
             <th class = "col-md-3">Train Name</th>
-            <th class = "col-md-3">Train Number</th>
+            <th class = "col-md-2">Train Number</th>
             <th class = "col-md-3">Start Station</th>
             <th class = "col-md-3">Destination</th>
-            <th class = "col-md-3">Arrival</th>
-            <th class = "col-md-3">Departure</th>
-            <th class = "col-md-3">Travel Time (hr:min:sec)</th>
+            <th class = "col-md-2">Arrival</th>
+            <th class = "col-md-2">Departure</th>
+            <th class = "col-md-2">Travel Time (hr:min:sec)</th>
         </tr>
         <tr *ngFor="let train of trainArray">
             <td class = "col-md-3">{{train.trainName}}</td>
-            <td class = "col-md-3">{{train.trainNumber}}</td>
+            <td class = "col-md-2">{{train.trainNumber}}</td>
             <td class = "col-md-3">{{train.startStation}}</td>
             <td class = "col-md-3">{{train.destination}}</td>
-            <td class = "col-md-3">{{train.arrivalTime}}</td>
-            <td class = "col-md-3">{{train.departureTime}}</td>
-            <td class = "col-md-3">{{train.date}}</td>
+            <td class = "col-md-2">{{train.arrivalTime}}</td>
+            <td class = "col-md-2">{{train.departureTime}}</td>
+            <td class = "col-md-2">{{train.date}}</td>
         </tr>
     </table>
 </div>

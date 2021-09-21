@@ -55,7 +55,7 @@ export class PaymentGooglepayComponent implements OnInit {
   }
 
   onPaymentDataAuthorized: google.payments.api.PaymentAuthorizedHandler = (
-    paymentData
+    paymentData:any
     ) => {
       console.log('payment authorized', JSON.stringify(paymentData));
       this.set = true

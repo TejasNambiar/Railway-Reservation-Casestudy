@@ -20,6 +20,7 @@ import { GooglePayButtonModule } from '@google-pay/button-angular';
 import { SignedinComponent } from './signedin/signedin.component';
 import { UserComponent } from './user/user.component';
 import { Admin1Component } from './admin1/admin1.component';
+import { PaymentGooglepayComponent } from './payment-googlepay/payment-googlepay.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import { Admin1Component } from './admin1/admin1.component';
     VerifyComponent,
     SignedinComponent,
     UserComponent,
-    Admin1Component
+    Admin1Component,
+    PaymentGooglepayComponent
   ],
   imports: [
     BrowserModule,

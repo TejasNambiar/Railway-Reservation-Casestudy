@@ -84,3 +84,13 @@ mat-tab:active{
 .mb-3{
     padding-top: 10px;
 }
+h4{
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+mat-tab label{
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 300;
+    font-size: 2.0rem;
+}

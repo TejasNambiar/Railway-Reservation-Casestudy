@@ -21,3 +21,6 @@ app.use(express.json());
 
 // calls the authentication routes
 app.use('/api',authRoutes)
+
+// exported for testing purposes
+module.exports = app

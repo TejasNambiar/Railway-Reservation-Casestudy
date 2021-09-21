@@ -89,7 +89,14 @@ label {
     color: #275ea3;
 }
 #tile1{
-    background: #4b5354;
+     /* For browsers that do not support gradients */
+     background: -webkit-linear-gradient(left top, #101115, #4b5354);
+     /* For Safari 5.1 to 6.0 */
+     background: -o-linear-gradient(bottom right, #101115, #4b5354);
+     /* For Opera 11.1 to 12.0 */
+     background: -moz-linear-gradient(bottom right, #101115, #4b5354);
+     /* For Firefox 3.6 to 15 */
+     background: linear-gradient(to bottom right, #101115, #4b5354);
 }
 #tile2{
     background-image: url("../../assets/RailPIC1.jpg");

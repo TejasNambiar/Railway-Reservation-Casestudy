@@ -19,7 +19,6 @@ const routes: Routes = [
   {path:"homePage",component:HomePageComponent},
   {path:"trainData",component:TrainComponent},
   {path:"booking",component:BookingFormsComponent},
-  {path:"signup1",component:LoginSignupComponent},
   {path:"admin", component:AdminComponent},
   {path: '', component: LoginComponent },
   {path: 'signup', component: SignupComponent },

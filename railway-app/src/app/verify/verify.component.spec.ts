@@ -1,4 +1,10 @@
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpWebService } from '../http-web.service';
 
 import { VerifyComponent } from './verify.component';
 
@@ -8,7 +14,13 @@ describe('VerifyComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VerifyComponent ]
+      imports:[
+        HttpModule,
+        RouterTestingModule,
+        RouterModule
+      ],
+      declarations: [ VerifyComponent ],
+      providers:[HttpWebService]
     })
     .compileComponents();
   });

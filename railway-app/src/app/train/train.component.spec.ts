@@ -1,13 +1,19 @@
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TrainComponent } from './train.component';
 
-xdescribe('TrainComponent', () => {
+describe('TrainComponent', () => {
   let component: TrainComponent;
   let fixture: ComponentFixture<TrainComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports:[
+        HttpClientTestingModule,
+        HttpClientModule
+      ],
       declarations: [ TrainComponent ]
     })
     .compileComponents();

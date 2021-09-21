@@ -21,26 +21,30 @@ module.exports.train_post = async (req,res) =>{
     // async - returns a promise
     const user = await Trains.create({ trainName, trainNumber, startStation, destination, arrivalTime, departureTime, date})
     console.log(trainName, trainNumber, startStation, destination, arrivalTime, departureTime, date)
-    res.status(201).json(user)
+    res.status(200).json(user)
   } catch (err) {
     const errors = handleError(err)
-    res.status(400).json({errors})
+    res.status(404).json({errors})
   }
 }
 // rerieve all data
   module.exports.train_get = (req,res) =>{
-    Trains.find((err, contacts) =>{
-      res.status(201).json(contacts)
-  })
+    try{
+      Trains.find((err, contacts) =>{
+        res.status(200).json(contacts)})
+    }catch(err){
+      const errors = handleError(err)
+    res.status(404).json({errors})
+    }      
   }
 // retrieve by id
 module.exports.train_get_id = (req,res) =>{
     Trains.findOne({_id:req.params.id}, (err,result)=>{
       if(err)
-          res.json(err)
+          res.status(404).json(err)
       else {   
           console.log('retrieved Contact')
-          res.json(result)
+          res.status(200).json(result)
       }
     })
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { BookingService } from '../booking.service';
 import { TrainService } from '../train.service';
+import {} from '@google-pay/button-angular';
 
 @Component({
   selector: 'app-booking-forms',
@@ -192,7 +193,7 @@ export class BookingFormsComponent implements OnInit {
   }
 
   onPaymentDataAuthorized: google.payments.api.PaymentAuthorizedHandler = (
-    paymentData
+    paymentData:any
     ) => {
       console.log('payment authorized', JSON.stringify(paymentData));
       this.set = true

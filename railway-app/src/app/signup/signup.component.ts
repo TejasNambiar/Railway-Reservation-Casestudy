@@ -87,12 +87,15 @@ export class SignupComponent implements OnInit {
       	document.getElementById('usertype')!.classList.remove('invalid-input');
 
 
+      // validate Username
       if (this.username == null || this.username === '') {
   			document.getElementById('username')!.classList.add('invalid-input');
 
   			this.action = 'Please Provide an Email id and try submitting again.';
   			this.validate = false;
   		} else {
+
+        // validate Email
         if (EMAIL_REGEX.test(this.username)) { this.validate = true;
         } else {
           document.getElementById('username')!.classList.add('invalid-input');
@@ -101,16 +104,21 @@ export class SignupComponent implements OnInit {
   		  }
   	  }
 
+      // validate Password
   		if (this.password == null || this.password === '') {
         document.getElementById('password')!.classList.add('invalid-input');
         this.action = 'Enter a Valid password.';
         this.validate = false;
       	}else {
+
+          // checking confirm Password
           if (this.confirm == null || this.confirm === '') {
           document.getElementById('cpassword')!.classList.add('invalid-input');
           this.action = 'Enter a Valid password.';
           this.validate = false;
           }else {
+
+            // cross checking with confirm Password
             if (this.password !== this.confirm) {
               document.getElementById('password')!.classList.add('invalid-input');
               document.getElementById('cpassword')!.classList.add('invalid-input');
@@ -120,13 +128,15 @@ export class SignupComponent implements OnInit {
           }
       }
 
-
+      // validating occupation
       if (this.occupation == null || this.occupation === '') {
   			document.getElementById('occupation')!.classList.add('invalid-input');
 
   		this.action = 'Please Enter your occupation and try submitting again.';
   		this.validate = false;
   	  }
+      
+      // validating firstname
   	  if (this.firstname == null || this.firstname === '') {
   		  document.getElementById('firstname')!.classList.add('invalid-input');
 
@@ -200,9 +210,9 @@ export class SignupComponent implements OnInit {
         this.action = 'Please Enter your PAN and try submitting again.';
         this.validate = false;
       }
-
+    
+    // checking if validate set to false
   	if (this.validate) {
-      // tslint:disable-next-line:max-line-length
       console.log("validate: "+this.validate)
       this.httpWebService.createNewUser(this.usertype,this.username, this.password, this.aadhaar, this.PAN, this.occupation, this.firstname, this.lastname, this.dob, this.phone, this.address, this.city, this.state, this.country, this.zip);
       console.log("routing to success page")

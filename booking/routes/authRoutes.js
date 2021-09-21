@@ -9,8 +9,7 @@ router.post('/booking',authController.booking_post)
 // trains get
 router.get('/booking',authController.booking_get)
 
-// trains get by id
-//router.get('/booking/:id',authController.booking_get_id)
+// deleted get_id
 
 // trains get by pnr
 router.get('/booking/:pnr',authController.booking_get_pnr1)

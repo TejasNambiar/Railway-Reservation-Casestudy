@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { PaymentGooglepayComponent } from './payment-googlepay.component';
 
-describe('PaymentGooglepayComponent', () => {
+xdescribe('PaymentGooglepayComponent', () => {
   let component: PaymentGooglepayComponent;
   let fixture: ComponentFixture<PaymentGooglepayComponent>;
 

@@ -1,6 +1,7 @@
 const chai = require('chai')
 const server = require("../app")
 let chaiHttp = require('chai-http')
+
 // assertion style
 chai.should();
 
@@ -14,6 +15,7 @@ describe('Tasks API', ()=>{
             chai.request(server)
             .get("/api/stations")
             .end((err,response)=>{
+                // check parameters
                 response.should.have.status(200);
                 response.body.should.be.a('array');
                 response.body.length.should.be.eq(16);

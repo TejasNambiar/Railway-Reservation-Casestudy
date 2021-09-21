@@ -1,5 +1,4 @@
-<div><app-signedin></app-signedin></div><br>
-<br><br>
+<div><app-signedin></app-signedin></div>
 <main>
     <div class="container-fluid">
         <h3 class="mb-3">Notice for Passengers</h3>
@@ -19,7 +18,7 @@
             <h3 class="h3">Check PNR </h3><hr>
             <form #myForm="ngForm">
                 <div class="form-group">
-                    <mat-label>Enter PNR Number</mat-label>
+                    <h4><i class="material-icons">find_replace</i>Enter PNR Number</h4>
                     <input class="form-control" #pnr="ngModel" [class.is-invalid]="pnr.invalid && pnr.touched" 
                     [(ngModel)]="pnrArray.pnr" type="text" name="pnr" pattern="^([a-zA-Z0-9_-]){6}$" required>
                 </div>
@@ -35,27 +34,27 @@
                 <h3 class="main-header" style="text-align: center;"><i class="material-icons">equalizer</i> PNR Found</h3>
                 <table border="3.5px">
                     <tr>
-                        <th class = "col-md-3">Full Name</th>
-                        <th class = "col-md-3">gender</th>
-                        <th class = "col-md-3">Disablities</th>
-                        <th class = "col-md-3">Train Name</th>
-                        <th class = "col-md-3">Tier</th>
-                        <th class = "col-md-3">Special Services</th>
-                        <th class = "col-md-3">Start</th>
-                        <th class = "col-md-3">Destination</th>
+                        <th class = "col-md-1.5">Full Name</th>
+                        <th class = "col-md-1">gender</th>
+                        <th class = "col-md-1">Disablities</th>
+                        <th class = "col-md-2">Train Name</th>
+                        <th class = "col-md-1">Tier</th>
+                        <th class = "col-md-1">Special Services</th>
+                        <th class = "col-md-2">Start</th>
+                        <th class = "col-md-2">Destination</th>
                         <th class = "col-md-3">Date</th>
                         <th class = "col-md-3">PNR</th>
                         <th class = "col-md-3">option</th>
                     </tr>
                     <tr>
-                        <td class = "col-md-3">{{pnrObject.fullName}}</td>
-                        <td class = "col-md-3">{{pnrObject.gender}}</td>
-                        <td class = "col-md-3">{{pnrObject.cvv}}</td>
-                        <td class = "col-md-3">{{pnrObject.trainName}}</td>
-                        <td class = "col-md-3">{{pnrObject.tier}}</td>
-                        <td class = "col-md-3">{{pnrObject.email}}</td>
-                        <td class = "col-md-3">{{pnrObject.start}}</td>
-                        <td class = "col-md-3">{{pnrObject.destination}}</td>
+                        <td class = "col-md-1.5">{{pnrObject.fullName}}</td>
+                        <td class = "col-md-1">{{pnrObject.gender}}</td>
+                        <td class = "col-md-1">{{pnrObject.cvv}}</td>
+                        <td class = "col-md-2">{{pnrObject.trainName}}</td>
+                        <td class = "col-md-1">{{pnrObject.tier}}</td>
+                        <td class = "col-md-1">{{pnrObject.email}}</td>
+                        <td class = "col-md-2">{{pnrObject.start}}</td>
+                        <td class = "col-md-2">{{pnrObject.destination}}</td>
                         <td class = "col-md-3">{{pnrObject.date}}</td>
                         <td class = "col-md-3">{{pnrObject.pnr}}</td>
                         <td class = "col-md-3">
@@ -68,16 +67,17 @@
     </mat-tab>
     <mat-tab label="Booking">
         <div class="container-fluid">
+            <h3 class="h3">Check Station-Train </h3><hr>
             <form #myForm="ngForm">
                 <div class="form-group">
-                    <mat-label class="label">Enter Start Location</mat-label>
+                    <h4 class="label"><i class="material-icons">train</i>Enter Start Location</h4>
                     <select placeholder="start" [formControl]="to" class="form-control" required>
                         <option [value]="start.stationName" *ngFor="let start of stationArray">{{start.stationName}}</option>
                     </select>
                     <mat-error *ngIf="to.invalid && to.touched">{{getErrorMessage()}}</mat-error>
                 </div><br>
                 <div class="form-group">
-                    <mat-label class="label">Enter Destination Location</mat-label>
+                    <h4 class="label"><i class="material-icons">train</i>Enter Destination Location</h4>
                         <select placeholder="destination" [formControl]="from" class="form-control" required>
                             <option [value]="destination.stationName" *ngFor="let destination of stationArray">{{destination.stationName}}</option>
                         </select>  
@@ -94,6 +94,7 @@
                         <th class = "col-md-3">Train Number</th>
                         <th class = "col-md-3">From</th>
                         <th class = "col-md-3">To</th>
+                        <th class = "col-md-3">Travel Time</th>
                         <th class = "col-md-3">Select</th>
                     </tr>
                     <tbody>
@@ -102,6 +103,7 @@
                             <td class = "col-md-3">{{TRAIN.trainNumber}}</td>
                             <td class = "col-md-3">{{TRAIN.startStation}}</td>
                             <td class = "col-md-3">{{TRAIN.destination}}</td>
+                            <td class = "col-md-3">{{TRAIN.date}}</td>
                             <td class = "col-md-3"><button mat-raised-button class="btn btn-primary" (click)="prefill(TRAIN)" color="primary" (click)="bookClick()">Book</button></td>
                         </tr>
                     </tbody>

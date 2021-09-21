@@ -1,4 +1,10 @@
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpWebService } from '../http-web.service';
 
 import { SignedinComponent } from './signedin.component';
 
@@ -8,7 +14,15 @@ describe('SignedinComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SignedinComponent ]
+      imports:[
+        HttpClientTestingModule,
+        HttpClientModule,
+        HttpModule,
+        RouterTestingModule,
+        RouterModule
+      ],
+      declarations: [ SignedinComponent ],
+      providers:[HttpWebService]
     })
     .compileComponents();
   });
@@ -22,4 +36,5 @@ describe('SignedinComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
 });
