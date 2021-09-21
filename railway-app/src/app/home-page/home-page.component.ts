@@ -90,8 +90,10 @@ export class HomePageComponent implements OnInit {
   }
 
   deleteService(object:any){
-    this.bookService.deleteBooking(object._id)
-     .subscribe(booking => this.pnrObject = booking)
+    if(confirm("Are you sure to delete booking with PNR "+object.pnr)) { 
+      this.bookService.deleteBooking(object._id)
+      .subscribe(booking => this.pnrObject = booking)
+    }
     // after delete, displays data aded on webpage
     this.ngOnInit()
   }
