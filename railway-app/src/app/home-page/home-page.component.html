@@ -1,35 +1,56 @@
 <div><app-signedin></app-signedin></div>
+<marquee> <h3 class="mb-3">Namaste. IRCTC welcomes you to the user dashboard. </h3></marquee>
 <main>
-    <div class="container-fluid">
-        <h3 class="mb-3">Notice for Passengers</h3>
-        <ul>
-            <li>Railway Services have resumed, and travel bookings can be made</li>
-            <li>Due to <strong>COVID</strong> restrictions, certain services may not be available</li>
-            <li>Kindly adhere to <strong>Government Guidlines</strong> during your travel.</li>
-        </ul>
+    <div class="row">
+        <div class="col-4 nav-panel">
+            <div class="container-fluid">
+                <h2 class="mb-3"><img src="../../assets/IRCTC-Symbol.png" id="img1">User Home Page</h2><hr>
+            </div>
+            <div class="container-fluid">
+                <h3 class="mb-3">Notice for Passengers</h3>
+                <ul>
+                    <li>Railway Services have resumed, and travel bookings can be made</li>
+                    <li>Due to <strong>COVID</strong> restrictions, certain services may not be available</li>
+                    <li>Kindly adhere to <strong>Government Guidlines</strong> during your travel.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-7 nav-panel" id="panel2"><br>
+            <h3 id="h3">Welcome To IRCTC</h3>
+        </div>
     </div>
 </main>
 <mat-tab-group bagroundColor="primary">
-    <mat-tab label="Train Schedule"> <br>
+    <mat-tab label="Train Schedule"> 
+        <marquee> <h2 class="mb-3">The train schedule is subject to change. Please check before booking tickets</h2></marquee>
+        <br>
         <div  id="trains"><app-train></app-train></div>
     </mat-tab>
-    <mat-tab label="PNR">
+    <mat-tab label="PNR"><marquee> <h2 class="mb-3">Please enter your PNR for checking your booking status</h2></marquee>
+        <br>
         <div class="container-fluid" id="pnr">
-            <h3 class="h3">Check PNR </h3><hr>
-            <form #myForm="ngForm">
-                <div class="form-group">
-                    <h4><i class="material-icons">find_replace</i>Enter PNR Number</h4>
-                    <input class="form-control" #pnr="ngModel" [class.is-invalid]="pnr.invalid && pnr.touched" 
-                    [(ngModel)]="pnrArray.pnr" type="text" name="pnr" pattern="^([a-zA-Z0-9_-]){6}$" required>
+            <div class="row">
+                <div class="col-7 nav-panel">
+                <h3 class="h3">Check PNR </h3><hr>
+                <form #myForm="ngForm">
+                    <div class="form-group">
+                        <h4><i class="material-icons">find_replace</i>Enter PNR Number</h4>
+                        <input class="form-control" #pnr="ngModel" [class.is-invalid]="pnr.invalid && pnr.touched" 
+                        [(ngModel)]="pnrArray.pnr" type="text" name="pnr" pattern="^([a-zA-Z0-9_-]){6}$" required>
+                    </div>
+                    <div *ngIf="pnr.errors && (pnr.touched || pnr.invalid)">
+                        <small class="text-danger" *ngIf="pnr.touched && pnr.errors.required">PNR number is required</small> 
+                        <small class="text-danger" *ngIf="pnr.errors.pattern">PNR must be 6 digits</small> 
+                    </div>
+                    <div class="form-group">
+                        <button mat-raised-button type="button" class="btn btn-primary" (click)="getPNR()" [disabled]="!myForm.form.valid">Get Booking</button>
+                    </div>
+                </form>
                 </div>
-                <div *ngIf="pnr.errors && (pnr.touched || pnr.invalid)">
-                    <small class="text-danger" *ngIf="pnr.touched && pnr.errors.required">PNR number is required</small> 
-                    <small class="text-danger" *ngIf="pnr.errors.pattern">PNR must be 6 digits</small> 
+                <div class="col-3 route-content">
+                    <h3>Here using the PNR generated post booking completion, can check for your booking details</h3>
                 </div>
-                <div class="form-group">
-                    <button mat-raised-button type="button" class="btn btn-primary" (click)="getPNR()" [disabled]="!myForm.form.valid">Get Booking</button>
-                </div>
-            </form>
+            </div>
             <div class="form-group" *ngIf="loading">
                 <h3 class="main-header" style="text-align: center;"><i class="material-icons">equalizer</i> PNR Found</h3>
                 <table border="3.5px">
@@ -99,7 +120,7 @@
                     </tr>
                     <tbody>
                         <tr *ngFor="let TRAIN of TrainArray">
-                            <td class = "col-md-3">{{TRAIN.trainName.values}}</td>
+                            <td class = "col-md-3">{{TRAIN.trainName}}</td>
                             <td class = "col-md-3">{{TRAIN.trainNumber}}</td>
                             <td class = "col-md-3">{{TRAIN.startStation}}</td>
                             <td class = "col-md-3">{{TRAIN.destination}}</td>
@@ -109,7 +130,7 @@
                     </tbody>
                 </table> 
             </div>
-            <button mat-raised-button type="button"  class="btn btn-primary" *ngIf="clicked"><a routerLink="/booking">Click for Booking</a></button>
+            <button mat-raised-button type="button"  class="btn btn-primary" *ngIf="clicked"><a routerLink="/booking">Proceed</a></button>
         </div>
     </mat-tab>
   </mat-tab-group>

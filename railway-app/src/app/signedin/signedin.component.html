@@ -1,7 +1,7 @@
-<nav class="navbar fixed-top justify-content-between">
-    <h2 class="mb-3"><a routerLink="/homePage"><img src="../../assets/irctc_logo.jpeg" class="d-inline-block align-top" alt="bluebox-logo">Welcome to Railway Reservation</a></h2>
+<mat-toolbar class="navbar fixed-top justify-content-between">
+    <h2 class="mb-3"><a routerLink="/homePage"><img src="../../assets/irctc_logo.jpeg" class="d-inline-block align-top" alt="bluebox-logo">IRCTC Railway Reservation <sub>{{user}}</sub></a></h2>
     <span>
-        <div class="nav-item dropdown">
+        <!-- <div class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Hello {{user}}
                 <mat-icon>account_circle</mat-icon>
@@ -10,6 +10,14 @@
                 <a class="dropdown-item" routerLink="/user/profile" routerLinkActive="active"><i class="material-icons">settings</i> View Profile</a>
                 <a class="dropdown-item" (click)='logout()'><i class="material-icons">power_settings_new</i>  Sign Out</a>
             </div>
-        </div>
+        </div> -->
+        <button mat-button [matMenuTriggerFor]="menu" class="nav-item dropdown">
+            Hello {{user}}
+            <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" >
+            <button mat-menu-item class="dropdown-item"><i class="material-icons">settings</i> View Profile</button>
+            <button mat-menu-item class="dropdown-item" (click)='logout()'><i class="material-icons">power_settings_new</i>  Sign Out</button>
+        </mat-menu>
     </span>
-</nav>
+</mat-toolbar>

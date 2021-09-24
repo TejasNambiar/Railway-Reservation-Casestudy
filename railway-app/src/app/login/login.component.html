@@ -9,14 +9,14 @@
                 <form id="needs-validation">
                     <div class="form-group">
                         <label for="InputEmail">Email address</label>
-                        <input type="email" id="username" name="username" [(ngModel)]="username" class="form-control" aria-describedby="emailHelp" placeholder="someone@something.com" required="required" />
+                        <input matInput type="email" id="username" name="username" [(ngModel)]="username" class="form-control" aria-describedby="emailHelp" placeholder="someone@something.com" required="required" />
 
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         <div class="invalid-feedback">Please provide a valid email.</div>
                     </div>
                     <div class="form-group">
                         <label for="InputPassword">Password</label>
-                        <input type="password" id="password" name="password" [(ngModel)]="password" class="form-control" placeholder="Password" required="required" />
+                        <input matInput type="password" id="password" name="password" [(ngModel)]="password" class="form-control" placeholder="Password" required="required" />
                         <div class="invalid-feedback">Please provide a valid password.</div>
                     </div>
                     <p class="errorDetect">{{errorDetl}}</p>

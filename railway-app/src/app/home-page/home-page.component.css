@@ -17,7 +17,7 @@ h2 {
     font-weight: 300;
     font-size: 2.0rem;
     text-align: center;
-    color: #9ecfe7;
+    color: #275ea3;
 }
 
 h3 {
@@ -93,4 +93,20 @@ mat-tab label{
     font-family: 'Segoe UI', sans-serif;
     font-weight: 300;
     font-size: 2.0rem;
+}
+#panel2{
+    margin-left: 100px;
+    background-image: url("../../assets/RAILPIC.jpg");
+    height:550px;
+    width: 100%;
+}
+#panel2 h3{
+    color: #d3d9df;
+}
+#img1{
+    height: 100px;
+    width: 200px;
+}
+h3{
+    Font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
 }

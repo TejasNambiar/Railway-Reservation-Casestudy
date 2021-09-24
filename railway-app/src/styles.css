@@ -14,7 +14,9 @@ td{
     width: fit-content;
 }
 table{
+    border-collapse: collapse;
     font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
 }
 tr{
     width: fit-content;
@@ -22,4 +24,6 @@ tr{
 th, td{
     padding:10px 10px;
 }
-
+tr:nth-of-type(even) {
+    background-color: #4b5354   ;
+}

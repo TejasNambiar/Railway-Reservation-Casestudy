@@ -1,5 +1,4 @@
-<app-signedin></app-signedin><br>
-<br><br>
+<app-signedin></app-signedin>
 <div class="flex-parent">
     <div class="h2-container"><h2 class="main-header"><i class="material-icons">dynamic_form</i>Train Booking</h2></div>
     <br>
@@ -27,39 +26,45 @@
                         <small class="text-danger" *ngIf="adhaar.touched && adhaar.errors.required">Adhaar number is required</small> 
                         <small class="text-danger" *ngIf="adhaar.errors.pattern">Adhaar number must be 10 digits</small> 
                      </div>
-                    <div class="form-group">
-                        <label class="label">Special services</label>
-                        <select class="form-control" #email="ngModel" required [class.is-invalid]="email.invalid && email.touched" 
+                     <mat-form-field>
+                        <div class="form-group">
+                            <mat-label class="label">Special services</mat-label>
+                            <mat-select class="form-control" #email="ngModel" required [class.is-invalid]="email.invalid && email.touched" 
                             [(ngModel)]="bookingArray.email" type="text" name="email" required>
-                            <option value="true">true</option>
-                            <option value="false">false</option>                    
-                        </select>
-                    </div>
-                    <div *ngIf="email.errors && (email.touched || email.invalid)">
-                        <small class="text-danger" *ngIf="email.touched && email.errors.required">Email id is required</small> 
-                    </div>
-                    <div class="form-group">
-                        <label class="label">Gender</label>
-                        <select class="form-control" #gender="ngModel" required [class.is-invalid]="gender.invalid && gender.touched" 
+                              <mat-option value="true">true</mat-option>
+                              <mat-option value="false">false</mat-option>
+                            </mat-select>
+                         </div>
+                        <div *ngIf="email.errors && (email.touched || email.invalid)">
+                            <small class="text-danger" *ngIf="email.touched && email.errors.required">Special Services is required</small> 
+                        </div>
+                    </mat-form-field><br>
+                    <mat-form-field>
+                        <div class="form-group">
+                            <mat-label class="label">Gender</mat-label>
+                            <mat-select class="form-control" #gender="ngModel" required [class.is-invalid]="gender.invalid && gender.touched" 
                             [(ngModel)]="bookingArray.gender" type="text" name="gender" required>
-                            <option value="male">male</option>
-                            <option value="female">female</option>                    
-                    </select>
-                    </div>
-                    <div *ngIf="gender.errors && (gender.touched || gender.invalid)">
-                        <small class="text-danger" *ngIf="gender.touched && gender.errors.required">Gender is required</small> 
-                    </div>
-                    <div class="form-group">
-                        <label class="label">Disablities</label>
-                        <select class="form-control" #disability="ngModel" [class.is-invalid]="disability.invalid && disability.touched"
-                        [(ngModel)]="bookingArray.cvv" name="disability" required>
-                            <option value="yes">yes</option>
-                            <option value="no">no</option>
-                        </select>
-                    </div>
-                    <div *ngIf="disability.errors && (disability.touched || disability.invalid)">
-                        <small class="text-danger" *ngIf="disability.touched && disability.errors.required">Disablity is required</small> 
-                    </div>
+                              <mat-option value="male">male</mat-option>
+                              <mat-option value="female">female</mat-option>
+                            </mat-select>
+                        </div>
+                        <div *ngIf="gender.errors && (gender.touched || gender.invalid)">
+                            <small class="text-danger" *ngIf="gender.touched && gender.errors.required">Gender is required</small> 
+                        </div>
+                    </mat-form-field><br>
+                    <mat-form-field>
+                        <div class="form-group">
+                            <mat-label class="label">Disablities</mat-label>
+                            <mat-select class="form-control" #disability="ngModel" [class.is-invalid]="disability.invalid && disability.touched"
+                            [(ngModel)]="bookingArray.cvv" name="disability" required>
+                              <mat-option value="yes">yes</mat-option>
+                              <mat-option value="no">no</mat-option>
+                            </mat-select>
+                        </div>
+                        <div *ngIf="disability.errors && (disability.touched || disability.invalid)">
+                            <small class="text-danger" *ngIf="disability.touched && disability.errors.required">Disablity is required</small> 
+                        </div>
+                    </mat-form-field>
                 </div>
                 <br>
                 <hr>
@@ -93,25 +98,35 @@
                 <br>
                 <div class="flex-item">
                     <h2><i class="material-icons">info</i>Train Details</h2>
-                    <div class="form-group">
-                        <label class="label">Train Name</label>
-                        <select class="form-control" #trainName="ngModel" [class.is-invalid]="trainName.invalid && trainName.touched"
-                        [(ngModel)]="bookingArray.trainName" name="trainName" required>
-                            <option [value]="trainPrefill.trainName">{{trainPrefill.trainName}}</option>
-                        </select>
-                    </div>
-                    <div *ngIf="trainName.errors && (trainName.touched || trainName.invalid)">
-                        <small class="text-danger" *ngIf="trainName.touched && trainName.errors.required">Train Name is required</small> 
-                    </div>
-
+                        <mat-form-field>
+                            <div class="form-group">
+                                <mat-label class="label">Train Name</mat-label>
+                                <mat-select class="form-control" #trainName="ngModel" [class.is-invalid]="trainName.invalid && trainName.touched"
+                                [(ngModel)]="bookingArray.trainName" name="trainName" required>
+                                    <mat-option [value]="trainPrefill.trainName">{{trainPrefill.trainName}}</mat-option>
+                                </mat-select>
+                            </div>
+                            <div *ngIf="trainName.errors && (trainName.touched || trainName.invalid)">
+                                <small class="text-danger" *ngIf="trainName.touched && trainName.errors.required">Train Name is required</small> 
+                            </div>
+                        </mat-form-field>
                     <div class="form-group">
                         <label class="label">Tier</label>
                         <select class="form-control" #tier="ngModel" [class.is-invalid]="tier.invalid && tier.touched"
                         [(ngModel)]="bookingArray.tier" type="text" name="tier" required>
-                        <option>S</option>
-                        <option>AC-1</option>
-                        <option>AC-2</option>
-                    </select>
+                            <option>S</option>
+                            <option>AC-1</option>
+                            <option>AC-2</option>
+                        </select>
+                        <!-- <mat-form-field>
+                            <mat-label>Tier</mat-label>
+                            <mat-select class="form-control" #tier="ngModel" [class.is-invalid]="tier.invalid && tier.touched"
+                            [(ngModel)]="bookingArray.tier" type="text" name="tier" required>
+                              <mat-option> S </mat-option>
+                              <mat-option> AC-1 </mat-option>
+                              <mat-option> AC-2 </mat-option>
+                            </mat-select>
+                        </mat-form-field> -->
                     </div>
                     <div *ngIf="tier.errors && (tier.touched || tier.invalid)">
                         <small class="text-danger" *ngIf="tier.touched && tier.errors.required">Tier is required</small> 

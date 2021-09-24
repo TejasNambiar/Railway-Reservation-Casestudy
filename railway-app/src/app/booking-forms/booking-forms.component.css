@@ -33,7 +33,7 @@ button {
     font-weight: 300;
     text-align: left;
 }
-label {
+.label {
     font-size: 15px;
     font-weight: 500 !important;
     color: #128efa !important;
