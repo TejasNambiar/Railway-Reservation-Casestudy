@@ -1,0 +1,55 @@
+{
+    "services": {
+        "authentication": {
+            "apiName": "authentication",
+            "protocol": "http",
+            "host": "http://localhost",
+            "port": 2000,
+            "url": "http://localhost:2000/api/"
+        },
+        "trains": {
+            "apiName": "trains",
+            "protocol": "http",
+            "host": "localhost",
+            "port": 3060,
+            "url": "http://localhost:3060/api/"
+        },
+        "stations": {
+            "apiName": "stations",
+            "protocol": "http",
+            "host": "localhost",
+            "port": 3070,
+            "url": "http://localhost:3070/api/"
+        },
+        "booking": {
+            "apiName": "booking",
+            "protocol": "http",
+            "host": "localhost",
+            "port": 3050,
+            "url": "http://localhost:3050/api/"
+        },
+        "fakeapi": [
+            {
+                "apiName": "fakeapi",
+                "protocol": "http",
+                "host": "localhost",
+                "port": 3090,
+                "url": "http://localhost:3090/api/"
+            },
+            {
+                "apiName": "fakeapi",
+                "protocol": "http",
+                "host": "localhost",
+                "port": 3099,
+                "url": "http://localhost:3099/api/"
+            }
+        ],
+        "trains/:id": {
+            "apiName": "trains/:id",
+            "protocol": "http",
+            "host": "localhost",
+            "port": 3060,
+            "url": "http://localhost:3060/api/"
+        }
+    }
+}

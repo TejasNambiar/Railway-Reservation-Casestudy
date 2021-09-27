@@ -57,26 +57,28 @@ export class LoginComponent {
 
         // end of validation!!!!
       if (this.validateStatus) {
-        this._httpWebService.getSignInConfirmation(this.username, this.password)
-          .subscribe((resp: any) => {
+            // check status if verified
+            this._httpWebService.getSignInConfirmation(this.username, this.password)
+              .subscribe((resp: any) => {
             const userData = resp;
-
+            // invalid user
             if (userData.status === '403') {
               this.errorDetl = 'We could not verify you! Please try again with a valid email';
             }else {
-
+              // valid but not verified
               if (userData.status === 401) {
+                // allows me to store locally while session, the user value id for future reference
                 window.sessionStorage.setItem('identifier', userData.userid);
                 this.router.navigate(['otp/userVerifyChallenge']);
               } else {
+                // verified user
                 this.token = userData.token;
+                // create a local storage for the user credentials
                 window.sessionStorage.setItem('userid', this.username);
                 window.sessionStorage.setItem('auth-token', this.token);
 
                 if (userData.route === '/user') {
                   this.router.navigate(['homePage']);
-                  // this.logged = true
-                  // // this._httpWebService.setLoggedStatus(this.logged)
                 } else {
                   this.router.navigate(['admin']);
                 }
@@ -87,12 +89,10 @@ export class LoginComponent {
 
 
           },
-            (          error: any) => {
+          (error: any) => {
               this.errors = error;
           });
         }
-
-
   }
 
 }

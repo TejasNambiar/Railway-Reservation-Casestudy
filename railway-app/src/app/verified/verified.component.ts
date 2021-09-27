@@ -11,9 +11,11 @@ export class VerifiedComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+    // clears the local storage after key verified has 200 status
     if (window.sessionStorage.getItem('verified') === '200') {
       window.sessionStorage.clear();
     } else {
+      // routes back to login page
       this.router.navigate(['']);
     }
   }

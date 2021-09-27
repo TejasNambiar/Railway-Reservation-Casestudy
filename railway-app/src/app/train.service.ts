@@ -15,13 +15,14 @@ export class TrainService {
 
   // this ur url to connect to mongodb
   urlTrain = 'http://localhost:3060/api/trains'
+  apiGatewayUrl = "http://localhost:4000/trains/trains"
   //urlTrain = 'assets/data/trains.json'
   getTrain():Observable<any>{
 
-    console.log("calling getTrain: "+ this.http.get<any>(this.urlTrain))
+    console.log("calling getTrain: "+ this.http.get<any>(this.apiGatewayUrl))
     // this will set ur header to GET 
     // return this.http.get(this.urlTrain).pipe(map(resp=>resp))
-    return this.http.get<any>(this.urlTrain)
+    return this.http.get<any>(this.apiGatewayUrl)
   }
   // add contact method
   // this will set ur header to POST
@@ -29,7 +30,7 @@ export class TrainService {
     var headers = new HttpHeaders()
     console.log("inside addTrain -> newTrain:",newTrain.toString())
     headers.append('Contact-Type','application/json')
-    return this.http.post<any>(this.urlTrain, newTrain,{headers:headers})
+    return this.http.post<any>(this.apiGatewayUrl, newTrain,{headers:headers})
     .pipe(map(resp=>resp)).pipe(catchError(this.erroHandler));
   }
   erroHandler(error: HttpErrorResponse) {

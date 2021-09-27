@@ -1,5 +1,5 @@
-nav {
-    background-color: #1565C0;
+mat-toobar {
+    background-color: #000010;
 }
 
 a {
@@ -55,3 +55,11 @@ p {
 img{
     height: 45px;
 }
+h2 a{
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 300;
+    font-size: 2.0rem;
+    text-align: center;
+    color: #9ecfe7;
+    text-decoration: none;
+} 

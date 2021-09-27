@@ -25,6 +25,7 @@ export class SignedinComponent implements OnInit {
           // changes routes to keep the users to users segment 
           if (userData.route === '/user') {
             this.router.navigate(['user']);
+            // once verfied, retireves verifeied user details from db
             this._httpWebService.signInDetails()
               .subscribe( (respd: { status: string; firstName: string; }) => {
                 if (respd.status === '200') {

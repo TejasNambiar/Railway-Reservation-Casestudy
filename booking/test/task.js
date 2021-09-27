@@ -17,7 +17,7 @@ describe('Tasks API', ()=>{
             .end((err,response)=>{
                 response.should.have.status(200);
                 response.body.should.be.a('array');
-                response.body.length.should.be.eq(42);
+                response.body.length.should.be.eq(91);
             done();
             })
         })
@@ -50,7 +50,8 @@ describe('Tasks API', ()=>{
             done();
             })
         })
-        
+    })
+    describe("POST /api/booking", ()=>{
         it("It should NOT POST without stationName", (done)=>{
             const task = {
                 "fullName": "",

@@ -45,12 +45,13 @@ module.exports.updateToken = function(email, status, token, options, callback) {
     Users.findOneAndUpdate(query, update, options, callback);
 }
 
-
+// checcks for user status, logged in, curent session going on, usertype: admin or user
 module.exports.verifyToken = function(userEmail, callback) {
     console.log("Requested verifyToken() API");
     Users.findOne({ email: userEmail }, { userType: 1, sessionStatus: 1, currentSession: 1 }, callback);
 }
 
+// creaates user
 module.exports.createUser = function(userData, callback) {
     console.log("Creating User API()");
     Users.create(userData);
@@ -59,10 +60,11 @@ module.exports.createUser = function(userData, callback) {
 
 module.exports.checkUserStatus = function(userEmail, callback) {
     console.log("Requested checkUserStatus() API");
+    // finding the identifier passed in the DB
     Users.findOne({ email: userEmail }, callback);
 }
 
-
+// update session to verified, giving access to website
 module.exports.updateUserStatus = function(userEmail, callback) {
     console.log("Requested updateUserStatus() API");
     var query = { "email": userEmail };

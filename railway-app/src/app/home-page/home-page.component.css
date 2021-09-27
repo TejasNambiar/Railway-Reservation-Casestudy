@@ -26,12 +26,17 @@ h3 {
     font-weight: 300;
     font-size: 2.0rem;
 }
-
+p{
+    color: #275ea3;
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 200;
+    font-size: 1.3rem;
+}
 ul li {
     font-family: 'Segoe UI', sans-serif;
     font-weight: 200;
     font-size: 1.3rem;
-    color: #4b5354;
+    color: #9ecfe7;
 }
 
 button:hover {
@@ -53,7 +58,7 @@ span{
     transition: linear 1s; 
 }
 main{
-    background-color: #e9edef;
+    background: linear-gradient(to right, #fff, #d3d9df);
 }
 material-icons{
     font-weight: 700; 
@@ -64,7 +69,7 @@ material-icons{
     background-color: #d3d9df;
 }
 #pnr{
-    background-color: #d3d9df;
+    background: linear-gradient(to right, #fff, #d3d9df);
 }
 input{
     width: 15%;
@@ -109,4 +114,14 @@ mat-tab label{
 }
 h3{
     Font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+}
+#tile1{
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, #101115, #4b5354);
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #101115, #4b5354);
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #101115, #4b5354);
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #101115, #4b5354);
 }

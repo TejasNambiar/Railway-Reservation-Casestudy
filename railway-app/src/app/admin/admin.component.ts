@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { BookingService } from '../booking.service';
+import { ConfirmationDialogService } from '../confirmation-dialog.service';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { StationService } from '../station.service';
 import { TrainService } from '../train.service';
 
@@ -35,7 +38,8 @@ export class AdminComponent implements OnInit {
     stationCode: ''
   }
  
-  constructor(private bookService:BookingService, private trainService:TrainService, private stationService:StationService){} 
+  constructor(private bookService:BookingService, private trainService:TrainService, 
+    private stationService:StationService, private dialog: MatDialog){} 
   ngOnInit(): void {
     // on itnialization, displays the contacts on the webpage
     this.trainService.getTrain()
@@ -68,16 +72,23 @@ export class AdminComponent implements OnInit {
   }
 
   deleteTrain(object:any){
-    if(confirm("Are you sure to delete "+object.trainName)) {
-      console.log("id: "+object._id)
-      this.trainService.deleteTrain(object._id)
-        .subscribe(train => this.trainArray = train)
-    }
-    
-    // after add, displays data aded on webpage
-    this.trainService.getTrain()
-    .subscribe(train => this.trainArray = train)
-  }
+    const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Confirm Remove Train',
+        message:"Are you sure to delete "+object.trainName
+      }
+    });
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        console.log("id: "+object._id)
+        this.trainService.deleteTrain(object._id)
+          .subscribe(train => this.trainArray = train)
+        // after add, displays data aded on webpage
+        this.trainService.getTrain()
+          .subscribe(train => this.trainArray = train)
+      }
+    })
+  }    
 
   // Station Service Admin Interface
   
@@ -94,25 +105,40 @@ export class AdminComponent implements OnInit {
 
   // Delete Station
   deleteStation(object:any){
-    if(confirm("Are you sure to delete booking with PNR "+object.stationName)) {
-      console.log("id: "+object._id)
-      this.stationService.deleteStation(object._id)
-        .subscribe(booking => this.bookingArray = booking)
-    }
-    
-    this.stationService.getStation()
-      .subscribe(booking => this.stationArray = booking)
+    const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Confirm Remove Station',
+        message: "Are you sure to delete Station "+object.stationName
+      }
+    });
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        console.log("id: "+object._id)
+        this.stationService.deleteStation(object._id)
+          .subscribe(booking => this.bookingArray = booking)
+          
+        this.stationService.getStation()
+        .subscribe(booking => this.stationArray = booking)
+      }
+    })    
   }
 
   // Booking Services Admin Interface
   deleteBooking(object:any){
-    if(confirm("Are you sure to delete booking with PNR "+object.pnr)) {
-      console.log("id: "+object._id)
-      this.bookService.deleteBooking(object._id)
-        .subscribe(booking => this.bookingArray = booking)
-    }
-    this.bookService.getBooking()
-      .subscribe(booking => this.bookingArray = booking)
+    const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Confirm Remove Booking',
+        message:"Are you sure to delete booking with PNR "+object.pnr
+      }
+    });
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        console.log("id: "+object._id)
+        this.bookService.deleteBooking(object._id)
+          .subscribe(booking => this.bookingArray = booking)
+        this.bookService.getBooking()
+          .subscribe(booking => this.bookingArray = booking)
+      }
+    })
   }
-
 }

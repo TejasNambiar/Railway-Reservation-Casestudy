@@ -22,6 +22,7 @@ import { UserComponent } from './user/user.component';
 import { Admin1Component } from './admin1/admin1.component';
 import { PaymentGooglepayComponent } from './payment-googlepay/payment-googlepay.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SignedinComponent,
     UserComponent,
     Admin1Component,
-    PaymentGooglepayComponent
+    PaymentGooglepayComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,

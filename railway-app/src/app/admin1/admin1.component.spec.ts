@@ -1,7 +1,9 @@
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpWebService } from '../http-web.service';
@@ -19,7 +21,8 @@ describe('Admin1Component', () => {
         HttpClientModule,
         HttpModule,
         RouterModule,
-        RouterTestingModule
+        RouterTestingModule,
+        MatMenuModule
       ],
       declarations: [ Admin1Component ],
       providers:[

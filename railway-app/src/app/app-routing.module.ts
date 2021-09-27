@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import { GooglePayButtonComponent } from '@google-pay/button-angular';
 import { AdminComponent } from './admin/admin.component';
 import { BookingFormsComponent } from './booking-forms/booking-forms.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -24,7 +25,8 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent },
   { path: 'signupsuccess', component: SignupSuccessComponent },
   { path: 'otp/userVerifyChallenge', component: VerifyComponent },
-  { path: 'verifiedOTP', component: VerifiedComponent }
+  { path: 'verifiedOTP', component: VerifiedComponent },
+  {path:'googlePay', component: GooglePayButtonComponent}
 ];
 
 @NgModule({

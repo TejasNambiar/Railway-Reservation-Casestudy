@@ -1,6 +1,6 @@
 <div><app-signedin></app-signedin></div>
-<marquee> <h3 class="mb-3">Namaste. IRCTC welcomes you to the user dashboard. </h3></marquee>
-<main>
+<marquee> <p class="mb-3">Namaste. <strong>IRCTC</strong> welcomes you to the user dashboard. | Due to <strong>COVID</strong> restrictions, certain services may not be available | Kindly adhere to <strong>Government Guidlines</strong> during your travel.</p></marquee>
+<main id="tile1">
     <div class="row">
         <div class="col-4 nav-panel">
             <div class="container-fluid">
@@ -9,9 +9,10 @@
             <div class="container-fluid">
                 <h3 class="mb-3">Notice for Passengers</h3>
                 <ul>
-                    <li>Railway Services have resumed, and travel bookings can be made</li>
-                    <li>Due to <strong>COVID</strong> restrictions, certain services may not be available</li>
-                    <li>Kindly adhere to <strong>Government Guidlines</strong> during your travel.</li>
+                    <li>Railway Services have resumed, and travel bookings can be made</li><br>
+                    <li> Train Timetable is regularly updated. Trains, and their details can be found in the timetable</li>
+                    <li>To book your tickets, Kindly navigate to the <strong>Bookings</strong> tab</li><br>
+                    <li>To check <strong>PNR Status</strong>, navigate to PNR tab</li>
                 </ul>
             </div>
         </div>
@@ -22,12 +23,10 @@
 </main>
 <mat-tab-group bagroundColor="primary">
     <mat-tab label="Train Schedule"> 
-        <marquee> <h2 class="mb-3">The train schedule is subject to change. Please check before booking tickets</h2></marquee>
-        <br>
+        <marquee> <p class="mb-3">The <strong>Train Schedule</strong> is subject to change. Please check before booking tickets</p></marquee>
         <div  id="trains"><app-train></app-train></div>
     </mat-tab>
-    <mat-tab label="PNR"><marquee> <h2 class="mb-3">Please enter your PNR for checking your booking status</h2></marquee>
-        <br>
+    <mat-tab label="PNR"><marquee> <p class="mb-3"><strong>Reservation details</strong> can be viewed after entering <strong>PNR</strong> generated on booking </p></marquee>
         <div class="container-fluid" id="pnr">
             <div class="row">
                 <div class="col-7 nav-panel">

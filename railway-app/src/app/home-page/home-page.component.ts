@@ -6,11 +6,14 @@ import { HttpWebService } from '../http-web.service';
 import { StationService } from '../station.service';
 import { TrainService } from '../train.service';
 
+declare var M: any;
+
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
+
 export class HomePageComponent implements OnInit {
 
   to = new FormControl('', [Validators.required]);
@@ -93,6 +96,7 @@ export class HomePageComponent implements OnInit {
     if(confirm("Are you sure to delete booking with PNR "+object.pnr)) { 
       this.bookService.deleteBooking(object._id)
       .subscribe(booking => this.pnrObject = booking)
+      M.toast({ html: 'Deleted successfully', classes: 'rounded' });
     }
     // after delete, displays data aded on webpage
     this.ngOnInit()

@@ -9,6 +9,7 @@ import { map, catchError } from 'rxjs/operators';
 export class StationService {
 
   urlStation = "http://localhost:3070/api/stations"
+  apiGatewayUrl = 'http://localhost:4000/stations/stations'
   awsURL = "https://1oydxk81i3.execute-api.us-east-1.amazonaws.com/test/resource"
   constructor(private http:HttpClient) { }
 
@@ -21,7 +22,7 @@ export class StationService {
     var headers = new HttpHeaders()
     console.log("inside addStation -> newStation:",newStation.toString())
     headers.append('Contact-Type','application/json')
-     return this.http.post<any>(this.urlStation, newStation,{headers:headers})
+     return this.http.post<any>(this.apiGatewayUrl, newStation,{headers:headers})
      .pipe(map(resp=>resp)).pipe(catchError(this.erroHandler));
   }
   erroHandler(error: HttpErrorResponse) {

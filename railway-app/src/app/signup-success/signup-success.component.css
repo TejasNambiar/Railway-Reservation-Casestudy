@@ -18,15 +18,21 @@ p {
     color: #82B1FF;
 }
 
-nav {
-    background-color: #1565C0;
+mat-toolbar {
+    background-color: #000010;
+}
+material-icon{
+    size: 200px;
 }
 
-a {
+h2 a{
     font-family: 'Segoe UI', sans-serif;
-    font-weight: 200;
-    color: white;
-}
+    font-weight: 300;
+    font-size: 2.0rem;
+    text-align: center;
+    color: #9ecfe7;
+    text-decoration: none;
+} 
 
 button:hover {
     width: 22%;
@@ -57,15 +63,15 @@ label {
 
 .jumbotron {
     margin-bottom: 0px;
-    background: #101115;
+    background: #4b5354;
     /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(left top, #101115, #101823);
+    background: -webkit-linear-gradient(left top, #101115, #4b5354);
     /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(bottom right, #101115, #101823);
+    background: -o-linear-gradient(bottom right, #101115, #4b5354);
     /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(bottom right, #101115, #101823);
+    background: -moz-linear-gradient(bottom right, #101115, #4b5354);
     /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom right, #101115, #101823);
+    background: linear-gradient(to bottom right, #101115, #4b5354);
     /* Standard syntax */
     height: 100%;
     padding-top: 130px;

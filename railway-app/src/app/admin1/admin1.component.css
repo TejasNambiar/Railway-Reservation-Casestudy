@@ -1,6 +1,10 @@
 .nav-item{
     margin-left: 0px;
     background: #e9edef;
+    color: #275ea3;
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 100;
+    font-size: 1.4rem;
 }
 .navbar{    
     background-color: #000010;
@@ -15,4 +19,10 @@ h2 a{
 } 
 img{
     height: 45px;
+}
+p{
+    color: #275ea3;
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 200;
+    font-size: 1.3rem;
 }

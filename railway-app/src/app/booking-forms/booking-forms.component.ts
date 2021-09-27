@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { BookingService } from '../booking.service';
 import { TrainService } from '../train.service';
 import {} from '@google-pay/button-angular';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-booking-forms',
@@ -15,8 +17,9 @@ export class BookingFormsComponent implements OnInit {
   payTrue!: boolean;
   resetFlag!:boolean
   resetTouched !:boolean
+  totalAmount !: number
 
-  constructor(private bookService:BookingService, private trainService:TrainService) { }
+  constructor(private bookService:BookingService, private trainService:TrainService, private dialog: MatDialog) { }
 
   bookingArray = {
     fullName:'',
@@ -76,6 +79,7 @@ export class BookingFormsComponent implements OnInit {
           this.error=true
         }
       )
+    this.amount()
     form.reset()
   }
 
@@ -111,9 +115,15 @@ export class BookingFormsComponent implements OnInit {
     }
   }
   reset1(pnr:any){
-    
-    if(confirm("Are you sure to delete booking with PNR "+pnr)) {  
-      this.resetTouched = true
+    const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Confirm Remove Booking',
+        message: "Are you sure to delete booking with PNR "+pnr
+      }
+    });
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.resetTouched = true
       console.log("Parameter PNR: "+pnr)
       console.log("ADHAAR: "+this.bookingArray.pnr)
       console.log("ADHAAR: "+this.bookingArray.pnr,this.bookingArray.adhaar)
@@ -130,7 +140,27 @@ export class BookingFormsComponent implements OnInit {
       }
       else
         this.resetFlag=false
-    }
+      }
+    })
+    // if(confirm("Are you sure to delete booking with PNR "+pnr)) {  
+    //   this.resetTouched = true
+    //   console.log("Parameter PNR: "+pnr)
+    //   console.log("ADHAAR: "+this.bookingArray.pnr)
+    //   console.log("ADHAAR: "+this.bookingArray.pnr,this.bookingArray.adhaar)
+    //   this.bookService.getBookingPnr(pnr,this.bookingArray.adhaar).subscribe(data=>this.dummyData=data)
+    //   console.log("Object In Question: "+JSON.stringify(this.dummyData))
+    //   if(this.dummyData){
+    //     this.resetTouched=false
+    //     console.log("ID selected: "+this.dummyData._id)
+    //     console.log("Name selected: "+this.dummyData.fullName)
+    //     this.bookService.deleteBooking(this.dummyData._id).subscribe(data=>this.dummyData=data)
+    //     console.log("ID Deleted: "+this.dummyData._id)
+    //     console.log("Name deleted: "+this.dummyData.fullName)
+    //     this.reset()
+    //   }
+    //   else
+    //     this.resetFlag=false
+    // }
   }
 
   next(){
@@ -154,8 +184,33 @@ export class BookingFormsComponent implements OnInit {
     this.payTrue=true
   }
 
+  amount(){
+    this.totalAmount = 3500
+    if(this.bookingArray.tier === 'AC-1'){
+      this.totalAmount += 600
+    }
+    else if(this.bookingArray.tier === 'AC-2'){
+      this.totalAmount += 500
+    }
+    else if(this.bookingArray.tier === 'AC-1'){
+      this.totalAmount += 200
+    }
+    
+    if(this.bookingArray.cvv === 'yes')
+      this.totalAmount -=100
+    else
+      this.totalAmount +=0
+    
+    if(this.bookingArray.email === 'true')
+      this.totalAmount +=200
+    else
+      this.totalAmount +=50
+  }
+
+
   // google pay
   paymentRequest: google.payments.api.PaymentDataRequest = {
+    // Declare the version of the Google Pay API that your site uses
     apiVersion: 2,
     apiVersionMinor: 0,
     allowedPaymentMethods: [
@@ -163,8 +218,10 @@ export class BookingFormsComponent implements OnInit {
         type: 'CARD',
         parameters: {
           allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+          // Define the card networks accepted by your site.
           allowedCardNetworks: ['AMEX', 'VISA', 'MASTERCARD']
         },
+        // Google encrypts information about a payer's selected card for secure processing by a payment provider.
         tokenizationSpecification: {
           type: 'PAYMENT_GATEWAY',
           parameters: {
@@ -178,16 +235,19 @@ export class BookingFormsComponent implements OnInit {
       merchantId: '12345678901234567890',
       merchantName: 'Demo Merchant'
     },
+    // transaction information
     transactionInfo: {
       totalPriceStatus: 'FINAL',
       totalPriceLabel: 'Total',
-      totalPrice: '4500',
+      totalPrice: `4050`,
       currencyCode: 'EUR',
       countryCode: 'BE'
     },
     callbackIntents: ['PAYMENT_AUTHORIZATION']
   };
 
+  // Authorize Payments is used to start the payment process and acknowledge a payment's authorization status.
+  // and done as follows
   onLoadPaymentData = (
     event: Event
   ): void => {
@@ -208,5 +268,10 @@ export class BookingFormsComponent implements OnInit {
 
   onError = (event: ErrorEvent): void => {
     console.error('error', event.error);
+  }
+
+  onclick(){
+    this.set = true
+      this.payTrue=true
   }
 }

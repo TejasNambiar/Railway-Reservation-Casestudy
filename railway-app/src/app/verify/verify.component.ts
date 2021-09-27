@@ -21,9 +21,11 @@ export class VerifyComponent implements OnInit {
   }
 
   ngOnInit() {
+    // retirieves identifier value from the window local storage and check if null
   if (window.sessionStorage.getItem('identifier') == null) {
     this.router.navigate(['']);
   }else {
+    // call http webservice to generate and rerieve otp confirmation 
     this._httpWebService.createOTP(window.sessionStorage.getItem('identifier'))
       .subscribe( res => {
         const otpData = res;
@@ -54,7 +56,9 @@ export class VerifyComponent implements OnInit {
         .subscribe(res => {
           const userData = res;
           console.log(userData);
+          // checks if the session id on local window storage matched session id from DB
           if ((userData.session_id === window.sessionStorage.getItem('session_id')) && ((userData.status === '200'))) {
+            // clears local session storages as the verificati9on process has completed
             window.sessionStorage.clear();
             window.sessionStorage.setItem('verified', '200');
             this.router.navigate(['/verifiedOTP']);

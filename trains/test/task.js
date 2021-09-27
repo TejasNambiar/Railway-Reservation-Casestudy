@@ -16,7 +16,7 @@ describe('Tasks API', ()=>{
             .end((err,response)=>{
                 response.should.have.status(200);
                 response.body.should.be.a('array');
-                response.body.length.should.be.eq(19);
+                response.body.length.should.be.eq(20);
             done();
             })
         })
@@ -47,6 +47,9 @@ describe('Tasks API', ()=>{
             done();
             })
         })
+        
+    })
+    describe("POST /api/trains", ()=>{
         it("It should NOT POST without TravelTime", (done)=>{
             const task = {
                 "trainName": "AA-BB EXPRESS",

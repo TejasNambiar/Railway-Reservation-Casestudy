@@ -13,9 +13,11 @@ var OTPreq = module.exports = mongoose.model('OTPreq', otpReqSchema, 'otpreq');
 
 module.exports.requestOTPGeneration = function(otp, callback) {
     console.log("Requested OTP Generation() API");
+    // creates an otp into the otp db
     OTPreq.create(otp);
 }
 
+// vwerrifies otp provided by user
 module.exports.verifyOTP = function(otpUID, callback) {
     console.log("Requested verifyOTP() API");
     OTPreq.find({ email: otpUID }, callback);
@@ -23,10 +25,11 @@ module.exports.verifyOTP = function(otpUID, callback) {
 
 module.exports.verifyResponse = function(identifier, s_id, otpass, callback) {
     console.log("Requested verifyResponse() API");
+    // will try to find user based on user name, otp and seesion id with status Not verified
     OTPreq.find({ email: identifier, session_id: s_id, otpn: otpass, status: 'Not Verified' }, callback);
 }
 
-
+// once otp verified, updates status from Not Verified to verified
 module.exports.updateStatus = function(oid, callback) {
     console.log("Requested updateStatus() API");
     var query = { _id: oid };

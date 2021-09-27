@@ -2,21 +2,16 @@ var express = require('express');
 var mongoose = require('mongoose')
 var bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
+// these are required to authenticate admin credentials
+// before sending new otp response
 const accountSid = 'ACed6e9977dce80c6e50ac44596f0f03fe';
 const authToken = 'e430526ca75b89bcd898542c760b8244';
 const twilio = require('twilio')
 const app = express()
 
 // Schema Models --
-//Trains = require('../trains/models/Trains');
-// Stations = require('./station-schema');
 Users = require('./users-schema');
 RqOTP = require('./reqotp-schema');
-// Booking = require('./booking-schema');
-// Password_Change = require('./password_detl-schema');
-// Notify = require('./notif-schema');
-
-
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -31,37 +26,11 @@ mongoose.connect('mongodb://localhost/DB').then(
 );
 var db = mongoose.connection;
 
-// app.use(bodyParser.json({
-//     extended: true
-// }));
 app.use(express())
 app.use(express.json())
 
 
 // REST APIS 
-
-app.get('/', function(req, res, next) {
-    res.sendStatus(404)
-});
-
-
-app.get('/api/trains', function(req, res, next) {
-    Trains.getTrains(function(err, train) {
-        if (err)
-            console.log('Error occured: --------> ' + err);
-        res.json(train)
-    });
-});
-
-
-// app.get('/api/stations', function(req, res, next) {
-//     Stations.getStations(function(err, station) {
-//         if (err)
-//             console.log('Error occured: --------> ' + err);
-//         res.json(station)
-//     });
-// });
-
 
 // login credentials
 app.post('/login', function(req, res) {
@@ -91,6 +60,7 @@ app.post('/login', function(req, res) {
                         // Starts the session on browser by giving access
                         var data = {
                             "email": user.email,
+                            // generates a random 16 digit session id
                             "session_id": uuidv4(),
                             "creation_time": Date.now(),
                         };
@@ -108,6 +78,7 @@ app.post('/login', function(req, res) {
                                 "route": routes,
                                 "status": "200"
                             };
+                            // updates login with res, paylod and token
                             updateTokenLogin(user.email, token, res, messagePayload);
                         });
                     }
@@ -227,13 +198,13 @@ function updateTokenLogin(email, token, res, carrier) {
         else {
             res.json(carrier);
         }
-
     });
 }
 
-
+// token verification is done
 function tokenVerification(email, token, res) {
 
+    // verifies token
     Users.verifyToken(email, function(err, user) {
         if (err)
             console.log('Error occured: --------> ' + err);
@@ -300,18 +271,23 @@ app.post('/api/myprofile/details', function(req, res) {
 
 });
 
+// used to check if user is verified or not
 app.post('/verifyUserChallenge', function(req, res) {
+    // retrieved from the post request from httpwebservice
     userId = req.body;
     Users.checkUserStatus(userId.identifier, function(err, user) {
         if (err) {
             console.log('Error occured: --------> ' + err);
         } else {
+            // user exists
             // checks for verified users if siignedup but not verified
             if (user.sessionStatus === 'Not Verified') {
 
                 const otpDetails = {
                     "email": user.email,
+                    // generates a 16 digit session otp
                     "session_id": uuidv4(),
+                    // generates otp 
                     "otpn": genOTP(),
                     "type": "User-Auth",
                     "status": "Not Verified"
@@ -319,6 +295,7 @@ app.post('/verifyUserChallenge', function(req, res) {
 
                 // call otp builder requestOTPGeneration
                 RqOTP.requestOTPGeneration(otpDetails);
+                // sends the otp generated to the the db 
                 sendOTP(otpDetails.session_id, user.countryCode, user.phone, otpDetails.otpn, res);
 
                 
@@ -330,13 +307,16 @@ app.post('/verifyUserChallenge', function(req, res) {
 });
 
 
-
+// once logged in but not verified, gets redirrected to confirm otp, and this troute is called
+// and takes the session id, otp 
 app.post('/verifyOTP', function(req, res) {
     otpResponse = req.body;
+    // veerifyying users session basede on otp and username
     RqOTP.verifyResponse(otpResponse.identifier, otpResponse.session_id, otpResponse.otpn, function(err, otpVer) {
         if (err) {
             console.log('Error occured: --------> ' + err);
         } else {
+            // user otp matched the db entry and proceeds to update status
             updateOTPStatus(otpResponse.identifier, otpVer[0]._id, otpVer[0].session_id, res);
         }
     });
@@ -344,6 +324,7 @@ app.post('/verifyOTP', function(req, res) {
 
 // generates random otp for User confirmation
 function genOTP() {
+    // generates a six digit otp
     return 'xxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random() * 16 | 0,
             v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -351,13 +332,17 @@ function genOTP() {
     });
 }
 
+// here we send the otp via  our registered phone number
 function sendOTP(session_id, countryCode, rec_number, otp_m, res) {
     receiver_N = countryCode + rec_number;
     hashed_N = countryCode + ' *** *' + rec_number.substring(6, rec_number.length);
+    // displays the otp generated
     otp_message = 'Your user verification OTP for RRS is ' + otp_m;
+    // printing the otp for academic purposes
     console.log(otp_message);
     console.log("Sending OTP to " + receiver_N);
 
+    // authenticating requests
     var client = new twilio(accountSid, authToken);
     client.messages.create({
             body: otp_message,
@@ -376,6 +361,8 @@ function sendOTP(session_id, countryCode, rec_number, otp_m, res) {
     });
 
 }
+
+// wen otp send and confirmed, updates sessionStatus to verified
 function updateOTPStatus(user, otpid, s_id, res) {
     RqOTP.updateStatus(otpid, function(err, otp) {
         if (err) {
@@ -399,16 +386,16 @@ function updateOTPStatus(user, otpid, s_id, res) {
 
 
 
-function updateTokenLogin(email, token, res, carrier) {
-    Users.updateToken(email, "Signed In", token, function(err, user) {
-        if (err)
-            console.log('Error occured: --------> ' + err);
-        else {
-            res.json(carrier);
-        }
+// function updateTokenLogin(email, token, res, carrier) {
+//     Users.updateToken(email, "Signed In", token, function(err, user) {
+//         if (err)
+//             console.log('Error occured: --------> ' + err);
+//         else {
+//             res.json(carrier);
+//         }
 
-    });
-}
+//     });
+// }
 
 
 function tokenVerification(email, token, res) {

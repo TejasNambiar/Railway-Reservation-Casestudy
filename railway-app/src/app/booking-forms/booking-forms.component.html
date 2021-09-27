@@ -1,14 +1,13 @@
 <app-signedin></app-signedin>
-<div class="flex-parent">
-    <div class="h2-container"><h2 class="main-header"><i class="material-icons">dynamic_form</i>Train Booking</h2></div>
-    <br>
+<div class="flex-parent" id="tag">
+    <div class="h2-container" id="tag"><h2 class="main-header"><i class="material-icons">dynamic_form</i>Train Booking</h2></div>
+    
     <mat-stepper linear #stepper>
     <form #myForm="ngForm">
         <mat-step id="step">
         <form #subForm = "ngForm">
-            <br>
             <ng-template matStepLabel>Fill out your Details</ng-template>
-            <div class="flex-container">
+            <div class="flex-container" id="tag">
                 <div class="flex-item">
                     <h2><i class="material-icons">info</i>Personal Details</h2>
                     <div class="form-group">
@@ -26,19 +25,17 @@
                         <small class="text-danger" *ngIf="adhaar.touched && adhaar.errors.required">Adhaar number is required</small> 
                         <small class="text-danger" *ngIf="adhaar.errors.pattern">Adhaar number must be 10 digits</small> 
                      </div>
-                     <mat-form-field>
-                        <div class="form-group">
-                            <mat-label class="label">Special services</mat-label>
-                            <mat-select class="form-control" #email="ngModel" required [class.is-invalid]="email.invalid && email.touched" 
+                     <div class="form-group">
+                        <label class="label">Special services</label>
+                        <select class="form-control" #email="ngModel" required [class.is-invalid]="email.invalid && email.touched" 
                             [(ngModel)]="bookingArray.email" type="text" name="email" required>
-                              <mat-option value="true">true</mat-option>
-                              <mat-option value="false">false</mat-option>
-                            </mat-select>
-                         </div>
-                        <div *ngIf="email.errors && (email.touched || email.invalid)">
-                            <small class="text-danger" *ngIf="email.touched && email.errors.required">Special Services is required</small> 
-                        </div>
-                    </mat-form-field><br>
+                            <option value="true">true</option>
+                            <option value="false">false</option>                    
+                        </select>
+                    </div>
+                    <div *ngIf="email.errors && (email.touched || email.invalid)">
+                        <small class="text-danger" *ngIf="email.touched && email.errors.required">Special Service is required</small> 
+                    </div><br>
                     <mat-form-field>
                         <div class="form-group">
                             <mat-label class="label">Gender</mat-label>
@@ -71,27 +68,31 @@
                 <br>
                 <div class="flex-item">
                     <h2><i class="material-icons">info</i>Station Details</h2>
-                    <div class="form-group">
-                        <label class="label">Start Station</label>
-                        <select class="form-control" #start="ngModel" [class.is-invalid]="start.invalid && start.touched"
-                        [(ngModel)]="bookingArray.start" type="text" name="start" required>
-                            <option [value]="trainPrefill.startStation">{{trainPrefill.startStation}}</option>   
-                        </select>
-                    </div>
-                    <div *ngIf="start.errors && (start.touched || start.invalid)">
-                        <small class="text-danger" *ngIf="start.touched && start.errors.required">Start Station is required is required</small> 
-                    </div>
+                    <mat-form-field>
+                        <div class="form-group">
+                            <mat-label class="label">Start Station</mat-label>
+                            <mat-select class="form-control" #start="ngModel" [class.is-invalid]="start.invalid && start.touched"
+                            [(ngModel)]="bookingArray.start" type="text" name="start" required>
+                              <mat-option [value]="trainPrefill.startStation">{{trainPrefill.startStation}}</mat-option>
+                            </mat-select>
+                        </div>
+                        <div *ngIf="start.errors && (start.touched || start.invalid)">
+                            <small class="text-danger" *ngIf="start.touched && start.errors.required">Start Station is required is required</small> 
+                        </div>
+                    </mat-form-field><br>
+                        <mat-form-field>
+                        <div class="form-group">
+                            <mat-label class="label">Destination</mat-label>
+                            <mat-select class="form-control" #destination="ngModel" [class.is-invalid]="destination.invalid && destination.touched"
+                            [(ngModel)]="bookingArray.destination" type="text" name="destination" required>
+                                <mat-option [value]="trainPrefill.destination">{{trainPrefill.destination}}</mat-option>
+                            </mat-select>
+                        </div>
+                        <div *ngIf="destination.errors && (destination.touched || destination.invalid)">
+                            <small class="text-danger" *ngIf="destination.touched && destination.errors.required">Destination Station is required</small> 
+                        </div>
 
-                    <div class="form-group">
-                        <label class="label">Destination</label>
-                        <select class="form-control" #destination="ngModel" [class.is-invalid]="destination.invalid && destination.touched"
-                        [(ngModel)]="bookingArray.destination" type="text" name="destination" required>
-                            <option [value]="trainPrefill.destination">{{trainPrefill.destination}}</option>                
-                        </select>
-                    </div>
-                    <div *ngIf="destination.errors && (destination.touched || destination.invalid)">
-                        <small class="text-danger" *ngIf="destination.touched && destination.errors.required">Destination Station is required</small> 
-                    </div>
+                    </mat-form-field>
                 </div>
                 <br>
                 <hr>
@@ -109,29 +110,21 @@
                             <div *ngIf="trainName.errors && (trainName.touched || trainName.invalid)">
                                 <small class="text-danger" *ngIf="trainName.touched && trainName.errors.required">Train Name is required</small> 
                             </div>
-                        </mat-form-field>
-                    <div class="form-group">
-                        <label class="label">Tier</label>
-                        <select class="form-control" #tier="ngModel" [class.is-invalid]="tier.invalid && tier.touched"
-                        [(ngModel)]="bookingArray.tier" type="text" name="tier" required>
-                            <option>S</option>
-                            <option>AC-1</option>
-                            <option>AC-2</option>
-                        </select>
-                        <!-- <mat-form-field>
-                            <mat-label>Tier</mat-label>
-                            <mat-select class="form-control" #tier="ngModel" [class.is-invalid]="tier.invalid && tier.touched"
-                            [(ngModel)]="bookingArray.tier" type="text" name="tier" required>
-                              <mat-option> S </mat-option>
-                              <mat-option> AC-1 </mat-option>
-                              <mat-option> AC-2 </mat-option>
-                            </mat-select>
-                        </mat-form-field> -->
-                    </div>
-                    <div *ngIf="tier.errors && (tier.touched || tier.invalid)">
-                        <small class="text-danger" *ngIf="tier.touched && tier.errors.required">Tier is required</small> 
-                    </div>
-
+                        </mat-form-field><br>
+                    <mat-form-field> 
+                        <div class="form-group">                        
+                            <mat-label class="label">Tier</mat-label>
+                                <mat-select class="form-control" #tier="ngModel" [class.is-invalid]="tier.invalid && tier.touched"
+                                [(ngModel)]="bookingArray.tier" type="text" name="tier" required>
+                                    <mat-option value="S">S</mat-option>
+                                    <mat-option value="AC-1">AC-1</mat-option>
+                                    <mat-option value="AC-2">AC-2</mat-option>
+                                </mat-select>
+                        </div>
+                        <div *ngIf="tier.errors && (tier.touched || tier.invalid)">
+                            <small class="text-danger" *ngIf="tier.touched && tier.errors.required">Tier is required</small> 
+                        </div>
+                    </mat-form-field>   
                     <div class="form-group">
                         <label class="label">Date</label>
                         <input type="date" class="form-control" #date="ngModel" [class.is-invalid]="date.invalid && date.touched"
@@ -150,7 +143,7 @@
         </mat-step>
         <mat-step class="tab1">
             <ng-template matStepLabel><span class="custom-tab">Confirm Booking</span></ng-template>
-            <div class="form-group" div *ngIf="!error">
+            <div  id="tag" class="form-group" div *ngIf="!error">
                 <h3>Confirm Booking Details</h3><hr>
                 <ul>
                     <li>Kindly check the details displaying in the table below</li>
@@ -196,7 +189,7 @@
                     <button mat-button matStepperPrevious (click)="back()" >Back</button>
                 </div>
             </div>
-            <div *ngIf="error">
+            <div id="tag" *ngIf="error">
                 <h3><i class="material-icons">report</i>Opps! Error Occured.</h3>
                 {{errorMsg}}
                 <ul>
@@ -214,22 +207,24 @@
         </mat-step>
         <mat-step>
             <ng-template matStepLabel>Authentication/Billing Details</ng-template>
-            <h2><i class="material-icons">payment</i>Payment Section</h2><hr>
-            <p>Your Booking is almost complete. Kindly make the payment throught the payment Gateway</p>
-            <br>
-            <div class="form-group">
-                <div *ngIf="resetTouched"><p><i class="material-icons">report</i>A technical error seems to have occured. please click reset again</p></div>
-                <google-pay-button environment="TEST" buttonType="buy" buttonColor="black" [paymentRequest]="paymentRequest"
-                    (loadpaymentdata)="onLoadPaymentData($event)" (error)="onError($event)" [paymentAuthorizedCallback]="onPaymentDataAuthorized">
-                </google-pay-button>
-                <button mat-raised-button matStepperNext type="submit" class="btn btn-primary" [disabled]="!payTrue">Book ticket</button>
-                <button mat-raised-button matStepperPrevious>Back</button>
+            <div id="tag">
+                <h2><i class="material-icons">payment</i>Payment Section</h2><hr>
+                <p>Your Booking is almost complete. Kindly make the payment throught the payment Gateway : <strong>{{totalAmount}}</strong></p>
+                <br>
+                <div class="form-group">
+                    <div *ngIf="resetTouched"><p><i class="material-icons">report</i>A technical error seems to have occured. please click reset again</p></div>
+                    <google-pay-button environment="TEST" buttonType="buy" buttonColor="black" [paymentRequest]="paymentRequest" 
+                        (loadpaymentdata)="onLoadPaymentData($event)" (error)="onError($event)" [paymentAuthorizedCallback]="onPaymentDataAuthorized">
+                    </google-pay-button>
+                    <button mat-raised-button matStepperNext type="submit" [disabled]="!payTrue" class="btn btn-primary" >Book ticket</button>
+                    <button mat-raised-button matStepperPrevious>Back</button>
+                </div>
             </div>
         </mat-step>
 
         <mat-step>
             <ng-template matStepLabel>Completed Booking</ng-template>
-            <div *ngIf="set">
+            <div id="tag" *ngIf="set">
                 <h2><i class="material-icons">confirmation_number</i>Confirmed Details</h2><hr>
                 <h3>Done with booking</h3>
                 <table border="3.5px" >
@@ -264,9 +259,9 @@
                 </table><br>
                 <h3>PNR for reference:</h3>
                 <p>{{pnrStatus}} </p><br>
-                <button mat-raised-button type="button" class="btn btn-primary"><a routerLink="/homePage">Go to Homepage</a></button>
+                <button mat-raised-button type="button" id="w1" class="btn btn-primary"><a routerLink="/homePage">Go to Homepage</a></button>
             </div>
-            <div *ngIf="error">
+            <div id="tag" *ngIf="error">
                 <h3>Booking Not Completed/Confirmed Yet</h3><hr>
                 <p>Kindly go back and complete the registration process to view this step</p>
             </div>

@@ -12,13 +12,14 @@ export class SignupService {
 
    // this ur url to connect to mongodb
    urlSignUp = 'http://localhost:3030/api/signup'
+   apiGatewayUrl="http://localhost:3030/signup/signup"
    //urlTrain = 'assets/data/trains.json'
    
    addUser(newAuth:any):Observable<any>{
     var headers = new HttpHeaders()
     console.log("inside addTrain -> newTrain:",newAuth.toString())
     headers.append('Contact-Type','application/json')
-    return this.http.post<any>(this.urlSignUp, newAuth,{headers:headers})
+    return this.http.post<any>(this.apiGatewayUrl, newAuth,{headers:headers})
     .pipe(map(resp=>resp)).pipe(catchError(this.erroHandler));
     }
     

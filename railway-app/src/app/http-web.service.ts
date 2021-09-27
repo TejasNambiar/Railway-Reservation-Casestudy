@@ -29,9 +29,10 @@ export class HttpWebService {
     return req;
   }
 
-
+ 
   createNewUser(usertype:string, username: string, password: string, aadhaar: string, PAN: string, occupation: string, firstname: string, lastname: string, dob: string, phone: string, address: string, city: string, state: string, country: string, zip: string) {
     const url = 'http://localhost:2000/signUpUser';
+    const apiGatewayUrl = 'http://localhost:4000/signUpUser/signUpUser'
     const reqBody = {
       'email': username,
       'password': password,
@@ -80,7 +81,7 @@ export class HttpWebService {
     const reqBody = {
       'identifier': userid
     };
-
+    // the url with the user details for otp generation of user
     const req = this.http.post(url, reqBody).map((res: Response) => res.json());
     return req;
   }

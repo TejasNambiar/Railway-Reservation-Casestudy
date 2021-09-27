@@ -18,7 +18,7 @@ p {
     color: #82B1FF;
 }
 
-nav {
+mat-toolbar {
     background-color: #000010;
 }
 
@@ -139,3 +139,11 @@ img{
     height: 45px;
     border-radius: 35%;
 }
+h2 a{
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 300;
+    font-size: 2.0rem;
+    text-align: center;
+    color: #9ecfe7;
+    text-decoration: none;
+} 
